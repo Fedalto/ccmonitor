@@ -1,0 +1,3 @@
+module Ccmonitor
+  # Your code goes here...
+end
