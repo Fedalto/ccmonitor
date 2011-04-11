@@ -2,12 +2,12 @@
 
 require 'sinatra'
 require 'nokogiri'
+require 'open-uri'
 
 get '/' do
-  file = File.open('resources/cctray.xml')
-  doc = Nokogiri::XML(file)
-  projects = doc.xpath('//Project')
-  projects.each do |project|
+  file = open('http://metrics.gid.gap.com/cctray.xml', :proxy => nil)
+  body << (erb :header)
+  Nokogiri::XML(file).xpath('//Project').each do |project|
     @project = project
     body << (erb :project)
   end
