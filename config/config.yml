@@ -1,2 +1,3 @@
 ---
-:FEED_URL: http://metrics.gid.gap.com/cctray.xml
+#:FEED_URL: "http://metrics.gid.gap.com/cctray.xml"
+:FEED_URL: "resources/cctray.xml"

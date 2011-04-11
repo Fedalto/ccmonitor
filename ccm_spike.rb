@@ -8,7 +8,7 @@ require 'yaml'
 config = YAML.load(File.read('config/config.yml'))
 
 get '/' do
-  file = open(config[:FEED_URL], :proxy => nil)
+  file = open(config[:FEED_URL])
   body << (erb :header)
   Nokogiri::XML(file).xpath('//Project').each do |project|
     @project = project
