@@ -3,9 +3,12 @@
 require 'sinatra'
 require 'nokogiri'
 require 'open-uri'
+require 'yaml'
+
+config = YAML.load(File.read('config/config.yml'))
 
 get '/' do
-  file = open('http://metrics.gid.gap.com/cctray.xml', :proxy => nil)
+  file = open(config[:FEED_URL], :proxy => nil)
   body << (erb :header)
   Nokogiri::XML(file).xpath('//Project').each do |project|
     @project = project
