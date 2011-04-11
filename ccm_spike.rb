@@ -7,12 +7,10 @@ require 'yaml'
 
 config = YAML.load(File.read('config/config.yml'))
 
-get '/' do
+get '/all' do
   file = open(config[:FEED_URL])
   body << (erb :header)
-  Nokogiri::XML(file).xpath('//Project').each do |project|
-    @project = project
-    body << (erb :project)
-  end
+  @projects = Nokogiri::XML(file).xpath('//Project')
+  body << (erb :all_projects)
   body
 end

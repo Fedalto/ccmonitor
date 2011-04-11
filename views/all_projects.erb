@@ -1,0 +1,8 @@
+<div class="all_projects">
+  <% for project in @projects %>
+    <div class="project">
+      <div class="name"><%= project.get_attribute('name') %></div>
+      <div class="activity"><%= project.get_attribute('activity') %></div>
+    </div>
+  <% end %>
+</div>
