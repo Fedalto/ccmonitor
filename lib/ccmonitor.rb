@@ -1,3 +1,8 @@
+require 'sinatra'
+
 module Ccmonitor
-  # Your code goes here...
+
+  get '/' do
+  end
+
 end
