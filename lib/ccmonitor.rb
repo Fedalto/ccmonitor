@@ -1,12 +1,9 @@
 require 'sinatra'
 require 'open-uri'
 
-module Ccmonitor
+set :CONFIG, YAML.load(File.read('config/config.yml'))
 
-  config = YAML.load(File.read('config/config.yml'))
-
-  get '/' do
-    xml_file = open(config[:FEED_URL])
-  end
-
+get '/' do
+  xml_file = open(settings.CONFIG[:FEED_URL])
 end
+

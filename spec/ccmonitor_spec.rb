@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe Ccmonitor do
+describe 'Ccmonitor' do
+
+  set :CONFIG, {:FEED_URL => "http://domain.com/cctray.xml"}
 
   def app
     Sinatra::Application
@@ -11,7 +13,8 @@ describe Ccmonitor do
     use_vcr_cassette
 
     before do
-      stub_request(:any, "http://metrics.gid.gap.com/cctray.xml")
+      stub_request(:any, "http://domain.com/cctray.xml")
+      config = {:FEED_URL => "http://domain.com/cctray.xml"}
     end
 
     it 'should respond' do
@@ -22,7 +25,7 @@ describe Ccmonitor do
     it 'should download the xml feed' do
       get '/'
       last_response.should be_ok
-      a_request(:get, "http://metrics.gid.gap.com/cctray.xml").should have_been_made.once
+      a_request(:get, "http://domain.com/cctray.xml").should have_been_made.once
     end
 
   end
