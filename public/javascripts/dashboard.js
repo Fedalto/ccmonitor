@@ -7,6 +7,12 @@ dashboard.state = (function () {
   };
 }());
 
+dashboard.ajax = (function () { //getting shit done
+  return {
+    get: function (uri, callback) { $.get(uri, null, callback); }
+  }
+}());
+
 dashboard.containers = (function () {
   return {
     failure: function () { return $("#failure_box"); },
@@ -54,13 +60,14 @@ dashboard.manager = function (specs) {
   }
 
   function populateCells(json) {
+    cells = [];
     $(json.projects).each(function (index, project) {
       cells.push(createCell(project));
     });
   }
   
   api.cells = function () { return cells; };
-  api.refresh = function () { populateCells(ajax.get(uris.refresh)); };
+  api.refresh = function () { ajax.get(uris.refresh, populateCells); };
 
   api.refresh();
 

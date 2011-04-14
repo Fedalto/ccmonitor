@@ -106,7 +106,7 @@ describe("manager", function () {
       {name: "Great Project", state: dashboard.state.success},
       {name: "Interesting Project", state: dashboard.state.failure}
     ]};
-    ajaxMock = { get: function () { return json; } };
+    ajaxMock = { get: function (url, callback) { callback(json); } };
     marco = dashboard.manager({ajax: ajaxMock});
   });
 
@@ -116,11 +116,11 @@ describe("manager", function () {
 
   it("should manager delegate the refresh action to the ajax service", function () {
     marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
-    spyOn(ajaxMock, "get").andCallThrough();
+    expect(marco.cells().length).toEqual(4);
 
+    json.projects.pop(); 
     marco.refresh();
-
-    expect(ajaxMock.get).toHaveBeenCalledWith("/refreshment");
+    expect(marco.cells().length).toEqual(3);
   });
 
   it("should create the cells using the ajax response", function () {
