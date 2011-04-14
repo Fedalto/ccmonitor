@@ -1,3 +1,31 @@
+var sandbox = (function () {
+  var api = {};
+  api.create = function () { $('body').append($("<div>", {id:"sandbox", "class":"sandbox"})); };
+  api.container = function () { return $("#sandbox"); };
+  api.destroy = function () { api.container().remove(); };
+
+  return api;
+}());
+
+describe("containers", function () {
+  beforeEach(function () {
+    sandbox.create();
+    sandbox.container().append($('<div>', {id:'success_box', 'class': 'success_box'}));
+    sandbox.container().append($('<div>', {id:'failure_box', 'class': 'failure_box'}));
+  });
+  afterEach(sandbox.destroy);
+
+  it('should point to the success container', function () {
+    expect(dashboard.containers.success().attr('id')).toEqual('success_box');
+    expect(dashboard.containers.success().attr('tagName')).toEqual('DIV');
+  });
+
+  it('should point to the failure container', function () {
+    expect(dashboard.containers.failure().attr('id')).toEqual('failure_box');
+    expect(dashboard.containers.failure().attr('tagName')).toEqual('DIV');
+  });
+});
+
 describe("a cell", function () {
   var cell;
 
@@ -28,6 +56,9 @@ describe("a cell", function () {
     expect(cell.element().attr("class")).toEqual(dashboard.state.success);
     cell.state(dashboard.state.failure);
     expect(cell.element().attr("class")).toEqual(dashboard.state.failure);
+  });
+
+  it("should move itself to the failure container when changing state to failure", function () {
   });
   
 }); 

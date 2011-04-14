@@ -7,6 +7,13 @@ dashboard.state = (function () {
   };
 }());
 
+dashboard.containers = (function () {
+  return {
+    failure: function () { return $("#failure_box"); },
+    success: function () { return $("#success_box"); }
+  };
+}());
+
 dashboard.cell = function (specs) {
   var state = specs.state, 
       project = specs.project,
@@ -14,12 +21,14 @@ dashboard.cell = function (specs) {
       api = {};
 
   api.project = function () { return project; };
+
   api.state = function (newState) { 
     api.element().removeClass(state);
     state = newState || state; 
     api.element().addClass(state);
     return state;
   };
+
   api.element = function () {
     return element = element || $("<div/>", { 'class': state }); 
   };
