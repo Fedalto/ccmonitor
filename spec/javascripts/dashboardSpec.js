@@ -52,6 +52,10 @@ describe("a cell", function () {
     expect(cell.state()).toEqual(dashboard.state.failure);
   });
   
+  it("should move itself to the correct container at creation time", function () {
+    expect(cell.element().parent().attr("id")).toEqual("failure_box");
+  });
+  
   it("should create a html element to represent itself", function () {
     expect(cell.element()).not.toBeNull();
     expect(cell.element().attr("tagName")).toEqual("DIV");
@@ -117,6 +121,12 @@ describe("manager", function () {
     marco.refresh();
 
     expect(ajaxMock.get).toHaveBeenCalledWith("/refreshment");
+  });
+
+  it("should create the cells using the ajax response", function () {
+    marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
+
+    expect(marco.cells()[0].project()).toEqual("Awesome Project");
   });
 
 });

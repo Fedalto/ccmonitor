@@ -21,12 +21,16 @@ dashboard.cell = function (specs) {
       api = {};
 
   api.project = function () { return project; };
+  
+  function refreshPlacement() {
+    api.element().appendTo(dashboard.containers[state]());
+  }  
 
   api.state = function (newState) { 
     api.element().removeClass(state);
     state = newState || state; 
     api.element().addClass(state);
-    api.element().appendTo(dashboard.containers[state]());
+    refreshPlacement();
     return state;
   };
 
@@ -34,16 +38,32 @@ dashboard.cell = function (specs) {
     return element = element || $("<div/>", { 'class': state }).addClass("cell"); 
   };
 
+  refreshPlacement();
+
   return api;
 };
 
 dashboard.manager = function (specs) {
   var api = {},
       ajax = specs.ajax || dashboard.ajax, //improve this
-      uris = specs.uris || {refresh: "/all" }; //improve this
+      uris = specs.uris || {refresh: "/all" },
+      cells = []; 
 
-  api.cells = function () { return specs.ajax.get(uris.refresh).projects; };
-  api.refresh = function () { ajax.get(uris.refresh); };
+  function createCell(project) {
+    return dashboard.cell({project: project.name, state: project.state});
+  }
+
+  function populateCells(json) {
+    $(json.projects).each(function (index, project) {
+      cells.push(createCell(project));
+    });
+  }
+  
+  api.cells = function () { return cells; };
+  api.refresh = function () { populateCells(ajax.get(uris.refresh)); };
+
+  api.refresh();
 
   return api;
 };
+
