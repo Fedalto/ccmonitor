@@ -3,16 +3,17 @@ var sandbox = (function () {
   api.create = function () { $('body').append($("<div>", {id:"sandbox", "class":"sandbox"})); };
   api.container = function () { return $("#sandbox"); };
   api.destroy = function () { api.container().remove(); };
+  api.createWithContainers = function () {
+    api.create();
+    api.container().append($('<div>', {id:'success_box', 'class': 'success_box'})).
+                    append($('<div>', {id:'failure_box', 'class': 'failure_box'}));
+  };
 
   return api;
 }());
 
 describe("containers", function () {
-  beforeEach(function () {
-    sandbox.create();
-    sandbox.container().append($('<div>', {id:'success_box', 'class': 'success_box'}));
-    sandbox.container().append($('<div>', {id:'failure_box', 'class': 'failure_box'}));
-  });
+  beforeEach(sandbox.createWithContainers);
   afterEach(sandbox.destroy);
 
   it('should point to the success container', function () {
@@ -29,7 +30,10 @@ describe("containers", function () {
 describe("a cell", function () {
   var cell;
 
+  afterEach(sandbox.destroy);
+  
   beforeEach(function () {
+    sandbox.createWithContainers();
     cell = dashboard.cell({project: 'AwesomeProject', state: dashboard.state.failure});
   });
 
@@ -41,7 +45,8 @@ describe("a cell", function () {
   it("should create a html element to represent itself", function () {
     expect(cell.element()).not.toBeNull();
     expect(cell.element().attr("tagName")).toEqual("DIV");
-    expect(cell.element().attr("class")).toEqual(cell.state());
+    expect(cell.element().attr("class")).toMatch(cell.state());
+    expect(cell.element().attr("class")).toMatch("cell");
   });
 
   it("should create a single element", function () {
@@ -53,12 +58,23 @@ describe("a cell", function () {
 
   it("should update element class when state changes", function () {
     cell.state(dashboard.state.success);
-    expect(cell.element().attr("class")).toEqual(dashboard.state.success);
+    expect(cell.element().attr("class")).toMatch(dashboard.state.success);
+    expect(cell.element().attr("class")).toMatch("cell");
     cell.state(dashboard.state.failure);
-    expect(cell.element().attr("class")).toEqual(dashboard.state.failure);
+    expect(cell.element().attr("class")).toMatch(dashboard.state.failure);
+    expect(cell.element().attr("class")).toMatch("cell");
+  });
+
+  it("should move itself to the success container when changing state to success", function () {
+    cell.state(dashboard.state.success);
+    expect(dashboard.containers.success().find('.cell').size()).toEqual(1);
+    expect(dashboard.containers.failure().find('.cell').size()).toEqual(0);
   });
 
   it("should move itself to the failure container when changing state to failure", function () {
+    cell.state(dashboard.state.failure);
+    expect(dashboard.containers.failure().find('.cell').size()).toEqual(1);
+    expect(dashboard.containers.success().find('.cell').size()).toEqual(0);
   });
   
 }); 

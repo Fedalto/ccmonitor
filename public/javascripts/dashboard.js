@@ -26,11 +26,12 @@ dashboard.cell = function (specs) {
     api.element().removeClass(state);
     state = newState || state; 
     api.element().addClass(state);
+    api.element().appendTo(dashboard.containers[state]());
     return state;
   };
 
   api.element = function () {
-    return element = element || $("<div/>", { 'class': state }); 
+    return element = element || $("<div/>", { 'class': state }).addClass("cell"); 
   };
 
   return api;
