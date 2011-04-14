@@ -36,3 +36,14 @@ dashboard.cell = function (specs) {
 
   return api;
 };
+
+dashboard.manager = function (specs) {
+  var api = {},
+      ajax = specs.ajax || dashboard.ajax, //improve this
+      uris = specs.uris || {refresh: "/all" }; //improve this
+
+  api.cells = function () { return specs.ajax.get(uris.refresh).projects; };
+  api.refresh = function () { ajax.get(uris.refresh); };
+
+  return api;
+};

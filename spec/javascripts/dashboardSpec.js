@@ -12,7 +12,17 @@ var sandbox = (function () {
   return api;
 }());
 
-describe("containers", function () {
+describe("the statuses", function () {
+  it("should have the failure state", function () {
+    expect(dashboard.state.failure).toEqual("failure");
+  });
+
+  it("should have the success state", function () {
+    expect(dashboard.state.success).toEqual("success");
+  });
+});
+
+describe("the containers", function () {
   beforeEach(sandbox.createWithContainers);
   afterEach(sandbox.destroy);
 
@@ -79,3 +89,34 @@ describe("a cell", function () {
   
 }); 
 
+describe("manager", function () {
+  var marco, json, ajaxStub, ajaxMock;
+
+  afterEach(sandbox.destroy);
+
+  beforeEach(function () {
+    sandbox.createWithContainers();
+    json = {projects: [
+      {name: "Awesome Project", state: dashboard.state.success},
+      {name: "Fun Project", state: dashboard.state.failure},
+      {name: "Great Project", state: dashboard.state.success},
+      {name: "Interesting Project", state: dashboard.state.failure}
+    ]};
+    ajaxMock = { get: function () { return json; } };
+    marco = dashboard.manager({ajax: ajaxMock});
+  });
+
+  it("should manage to create a collection of cells according to input", function () {
+    expect(marco.cells().length).toEqual(4);
+  });
+
+  it("should manager delegate the refresh action to the ajax service", function () {
+    marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
+    spyOn(ajaxMock, "get").andCallThrough();
+
+    marco.refresh();
+
+    expect(ajaxMock.get).toHaveBeenCalledWith("/refreshment");
+  });
+
+});
