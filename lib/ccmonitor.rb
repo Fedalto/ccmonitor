@@ -18,13 +18,13 @@ end
 
 get "/all" do # this is just a dummy/stub
   %!{"projects": [
-    {"name": "Awesome Project", "state": "success"},
-    {"name": "Fun Project", "state": "success"},
-    {"name": "Great Project", "state": "success"},
-    {"name": "Interesting Project", "state": "success"},
-    {"name": "Fantastic Project", "state": "success"},
-    {"name": "Unbelievable Project", "state": "success"},
-    {"name": "Preposterous Project", "state": "failure"},
-    {"name": "Outrageous Project", "state": "failure"}
+    {"name": "Awesome", "state": "success"},
+    {"name": "Fun", "state": "success"},
+    {"name": "Great", "state": "success"},
+    {"name": "Interesting", "state": "success"},
+    {"name": "Fantastic", "state": "success"},
+    {"name": "Unbelievable", "state": "success"},
+    {"name": "Preposterous", "state": "failure"},
+    {"name": "Outrageous", "state": "failure"}
   ]}!
 end

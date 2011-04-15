@@ -46,7 +46,10 @@ dashboard.cell = function (specs) {
   };
 
   api.element = function () {
-    return element = element || $("<div/>", { 'class': state }).addClass("cell"); 
+    element = element || $("<div/>", { 'class': state }).addClass("cell"); 
+    element.empty();
+    element.append($('<h4>', {'html': project}));
+    return element;
   };
 
   refreshPlacement();

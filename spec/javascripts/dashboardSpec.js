@@ -51,6 +51,10 @@ describe("a cell", function () {
     expect(cell.project()).toEqual('AwesomeProject');
     expect(cell.state()).toEqual(dashboard.state.failure);
   });
+
+  it("should contain a header with the project name", function () {
+    expect(cell.element().find('h4').html()).toEqual(cell.project());
+  });
   
   it("should move itself to the correct container at creation time", function () {
     expect(cell.element().parent().attr("id")).toEqual("failure_box");

@@ -1,20 +1,16 @@
-div.cell {
-  margin: 10px;
-  color: #f2f2f2;
+html, html *, * {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: verdana, calibri, helvetica, arial;
+  text-decoration: none;
+  font-size: 15pt;
 }
-div.cell.failure {
-  background: #a04040;
-  width: 300px;
-  height: 300px;
-}
-div.cell.success {
-  background: #40a860;
-  width: 100px;
-  height: 100px;
-}
-div#success_box {
-  float: left;
-}
-div#failure_box {
-  float: left;
-}
+div.cell { margin: 10px; color: #f2f2f2; text-align: center; }
+div.cell.failure { background: #a04040; width: 300px; height: 300px;
+  line-height: 300px; }
+div.cell.success { background: #40a860; width: 100px; height: 100px;
+  line-height: 100px; }
+div.cell.success h4 { font-size: 9pt; }
+div#success_box { float: left; }
+div#failure_box { float: left; }
