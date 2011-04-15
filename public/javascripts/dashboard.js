@@ -14,10 +14,15 @@ dashboard.ajax = (function () { //getting shit done
 }());
 
 dashboard.containers = (function () {
-  return {
-    failure: function () { return $("#failure_box"); },
-    success: function () { return $("#success_box"); }
+  var api = {},
+      selectors = {success: "#success_box", failure: "#failure_box"};
+  api.success = function () { return $(selectors.success); };
+  api.failure = function () { return $(selectors.failure); };
+  api.clear = function () {
+    api.success().empty();
+    api.failure().empty();
   };
+  return api;
 }());
 
 dashboard.cell = function (specs) {
@@ -51,16 +56,24 @@ dashboard.cell = function (specs) {
 
 dashboard.manager = function (specs) {
   var api = {},
-      ajax = specs.ajax || dashboard.ajax, //improve this
-      uris = specs.uris || {refresh: "/all" },
+      config = specs || {}
+      ajax = config.ajax || dashboard.ajax, //improve this
+      uris = config.uris || {refresh: "/all" },
       cells = []; 
 
   function createCell(project) {
     return dashboard.cell({project: project.name, state: project.state});
   }
 
-  function populateCells(json) {
+  function resetState() {
     cells = [];
+    dashboard.containers.clear();
+  }
+
+  function populateCells(input) {
+    resetState();
+    var json = $.parseJSON(input);
+    console.log(json);
     $(json.projects).each(function (index, project) {
       cells.push(createCell(project));
     });
@@ -73,4 +86,3 @@ dashboard.manager = function (specs) {
 
   return api;
 };
-

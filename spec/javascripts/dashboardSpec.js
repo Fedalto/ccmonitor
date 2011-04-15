@@ -100,12 +100,12 @@ describe("manager", function () {
 
   beforeEach(function () {
     sandbox.createWithContainers();
-    json = {projects: [
-      {name: "Awesome Project", state: dashboard.state.success},
-      {name: "Fun Project", state: dashboard.state.failure},
-      {name: "Great Project", state: dashboard.state.success},
-      {name: "Interesting Project", state: dashboard.state.failure}
-    ]};
+    json = '{"projects": [' + 
+      '{"name": "Awesome Project", "state": "success"}, ' +
+      '{"name": "Fun Project", "state": "success"}, ' +
+      '{"name": "Great Project", "state": "success"}, ' +
+      '{"name": "Interesting Project", "state": "failure"} ' +
+    ']}';
     ajaxMock = { get: function (url, callback) { callback(json); } };
     marco = dashboard.manager({ajax: ajaxMock});
   });
@@ -114,13 +114,21 @@ describe("manager", function () {
     expect(marco.cells().length).toEqual(4);
   });
 
-  it("should manager delegate the refresh action to the ajax service", function () {
+  it("should clear the cell list when refreshing", function () {
     marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
     expect(marco.cells().length).toEqual(4);
-
-    json.projects.pop(); 
     marco.refresh();
-    expect(marco.cells().length).toEqual(3);
+    expect(marco.cells().length).toEqual(4);
+  });
+
+  it("should clear the containers when refreshing", function () {
+    dashboard.containers.success().append($('<br>'));
+    dashboard.containers.failure().append($('<br>'));
+
+    marco.refresh();
+
+    expect(dashboard.containers.success().find('br').length).toEqual(0);
+    expect(dashboard.containers.failure().find('br').length).toEqual(0);
   });
 
   it("should create the cells using the ajax response", function () {
