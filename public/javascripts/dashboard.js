@@ -61,7 +61,7 @@ dashboard.manager = function (specs) {
   var api = {},
       config = specs || {}
       ajax = config.ajax || dashboard.ajax, //improve this
-      uris = config.uris || {refresh: "/all" },
+      uris = config.uris || {refresh: "/all_projects" },
       cells = []; 
 
   function createCell(project) {

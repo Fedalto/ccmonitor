@@ -1,0 +1,17 @@
+<Projects>
+
+  <Project name="cool name"
+    activity="Sleeping"
+    lastBuildStatus="Success"
+    lastBuildLabel="autofeed-11.01.2"
+    lastBuildTime="2011-01-25T22:55:40"
+    webUrl="http://sfci-l06.gid.gap.com:8080/buildresults/11.01-autofeed-package"/>
+
+  <Project name="even better name"
+    activity="Sleeping"
+    lastBuildStatus="Failure"
+    lastBuildLabel="autofeed-11.01.2"
+    lastBuildTime="2011-01-25T22:55:40"
+    webUrl="http://sfci-l06.gid.gap.com:8080/buildresults/11.01-autofeed-package"/>
+
+</Projects>

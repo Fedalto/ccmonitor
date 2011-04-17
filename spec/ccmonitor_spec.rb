@@ -2,30 +2,32 @@ require 'spec_helper'
 
 describe 'Ccmonitor' do
 
-  set :CONFIG, {:FEED_URL => "http://domain.com/cctray.xml"}
-
   def app
     Sinatra::Application
   end
 
-  context "when receives a '/' request" do
-
-    use_vcr_cassette
+  context "when receives a '/all_projects' request" do
 
     before do
-      stub_request(:any, "http://domain.com/cctray.xml")
-      config = {:FEED_URL => "http://domain.com/cctray.xml"}
+      set :CONFIG, {:FEED_URL => "resources/simple.xml"}
     end
 
-    it 'should respond' do
-      get '/'
-      last_response.should be_ok
-    end
+    it 'should return a Json with all projects' do
+      project1 = Hash.new
+      project1['name'] = 'cool name'
+      project1['state'] = 'success'
+      project2 = Hash.new
+      project2['name'] = 'even better name'
+      project2['state'] = 'failure'
 
-    it 'should download the xml feed' do
-      get '/'
+      expected = Hash.new
+      expected['projects'] = []
+      expected['projects'] << project1
+      expected['projects'] << project2
+
+      get '/all_projects'
       last_response.should be_ok
-      a_request(:get, "http://domain.com/cctray.xml").should have_been_made.once
+      JSON.parse(last_response.body).should == expected
     end
 
   end
