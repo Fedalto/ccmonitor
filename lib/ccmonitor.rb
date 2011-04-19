@@ -2,6 +2,7 @@ require "rubygems"
 require "sinatra"
 require "open-uri"
 require "yaml"
+require 'json'
 
 require 'projects_parser'
 
@@ -15,5 +16,8 @@ end
 
 get "/all_projects" do
   xml_feed = open(settings.CONFIG[:FEED_URL])
-  ProjectsParser.new(xml_feed).to_json
+  filter = params['filter']
+  parser = ProjectsParser.new
+  parser.add_filter(filter) unless filter.nil?
+  JSON.generate(parser.parse xml_feed)
 end

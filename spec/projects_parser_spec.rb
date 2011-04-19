@@ -6,7 +6,8 @@ describe ProjectsParser do
   context 'when created with an xml' do
 
     before do
-      @parser = ProjectsParser.new "<Projects><Project name='Awesome' lastBuildStatus='Success' /></Projects>"
+      @xml = "<Projects><Project name='Awesome' lastBuildStatus='Success' /></Projects>"
+      @parser = ProjectsParser.new
     end
 
     it 'should generate a tag for each project' do
@@ -17,9 +18,20 @@ describe ProjectsParser do
       expected['projects'] = []
       expected['projects'] << a_project
 
-      json = @parser.to_json
+      result = @parser.parse @xml
 
-      JSON.parse(json).should == expected
+      result.should == expected
+    end
+
+    it 'should filter by project name' do
+      expected = Hash.new
+      expected['projects'] = []
+
+      @parser.add_filter('Awesome')
+
+      result = @parser.parse @xml
+
+      result.should == expected
     end
 
   end
