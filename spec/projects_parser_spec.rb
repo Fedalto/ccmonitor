@@ -46,6 +46,14 @@ describe ProjectsParser do
       result.should == @expected
     end
 
+    it 'should filter by a list of project names' do
+      @parser.add_filter('cool')
+      @parser.add_filter('better')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
   end
 
 
