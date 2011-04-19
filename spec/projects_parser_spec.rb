@@ -13,16 +13,9 @@ describe ProjectsParser do
       </Projects>
       !
 
-      @project1 = Hash.new
-      @project1['name'] = 'a cool name'
-      @project1['state'] = 'success'
-
-      @project2 = Hash.new
-      @project2['name'] = 'an even better name'
-      @project2['state'] = 'failure'
-
-      @expected = Hash.new
-      @expected['projects'] = []
+      @project1 = {'name' => 'a cool name', 'state' => 'success'}
+      @project2 = {'name' => 'an even better name', 'state' => 'failure'}
+      @expected = {'projects' => []}
 
       @parser = ProjectsParser.new
     end
@@ -37,9 +30,9 @@ describe ProjectsParser do
     end
 
     it 'should filter by project name' do
-      @expected['projects'] << @project2
+      @expected['projects'] << @project1
 
-      @parser.add_filter('cool')
+      @parser.add_filter('better')
 
       result = @parser.parse @xml
 
