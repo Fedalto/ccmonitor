@@ -3,20 +3,33 @@ require 'nokogiri'
 class ProjectsParser
 
   def initialize
-    @filters = []
+    @exclude_filters = []
+    @include_filters = []
   end
 
   def should_include?(name)
-    @filters.each do |filter|
+    if !@include_filters.empty?
+      @include_filters.each do |filter|
+        if name.include? filter
+          return true
+        end
+      end
+      return false
+    end
+    @exclude_filters.each do |filter|
       if name.include? filter
         return false
       end
     end
-    true
+    return true
   end
 
   def exclude(name)
-    @filters << name  
+    @exclude_filters << name  
+  end
+
+  def include(name)
+    @include_filters << name
   end
 
   def parse(xml)

@@ -46,6 +46,27 @@ describe ProjectsParser do
 
       result.should == @expected
     end
+
+    it 'should include only the specified projects' do
+      @expected['projects'] << @project1
+
+      @parser.include('cool')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
+
+    it 'should ignore exclusions if there is an include' do
+      @expected['projects'] << @project1
+
+      @parser.include('cool')
+      @parser.exclude('cool')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
   end
 
 
