@@ -1,0 +1,12 @@
+= CC Monitor
+
+== Release 1
+  * Two panel view
+  * Inclusion filter
+  * Exclusion filter
+
+== Possible Features
+  * All builds
+  * Grouped projects
+  * Recently broken builds
+  * Configuration Page
