@@ -15,7 +15,7 @@ class ProjectsParser
     true
   end
 
-  def add_filter(name)
+  def exclude(name)
     @filters << name  
   end
 

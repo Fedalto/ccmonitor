@@ -28,19 +28,19 @@ describe ProjectsParser do
       result.should == @expected
     end
 
-    it 'should filter by project name' do
+    it 'should exclude a project by a part of the name' do
       @expected['projects'] << @project1
 
-      @parser.add_filter('better')
+      @parser.exclude('better')
 
       result = @parser.parse @xml
 
       result.should == @expected
     end
 
-    it 'should filter by a list of project names' do
-      @parser.add_filter('cool')
-      @parser.add_filter('better')
+    it 'should exclude a list of projects by parts of the names' do
+      @parser.exclude('cool')
+      @parser.exclude('better')
 
       result = @parser.parse @xml
 
