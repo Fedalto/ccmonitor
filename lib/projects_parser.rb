@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'nokogiri'
 
 class ProjectsParser
@@ -8,12 +9,9 @@ class ProjectsParser
   end
 
   def should_include?(name)
-    if @include_filters.empty?
-      @exclude_filters.each { |filter| return false if name.include? filter }
-      return true
-    end
-    @include_filters.each { |filter| return true if name.include? filter }
-    return false
+    return @include_filters.empty? ?
+     !@exclude_filters.any? { |filter| name.include? filter } :
+      @include_filters.any? { |filter| name.include? filter }
   end
 
   def exclude(name)
