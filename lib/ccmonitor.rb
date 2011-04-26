@@ -11,13 +11,13 @@ set :static, true
 set :sessions, true
 
 get "/wall" do # this is just a dummy/stub
-  session[:include] = params[:include].split(',')
+  session[:include] = params[:include].split(',') unless params[:include].nil?
   erb :wall
 end
 
 get "/all_projects" do # this is just a dummy/stub
   xml_feed = open(settings.CONFIG[:FEED_URL])
   parser = ProjectsParser.new
-  session[:include].each { |filter| parser.include(filter) }
+  session[:include].each { |filter| parser.include(filter) } unless session[:include].nil?
   JSON.generate(parser.parse xml_feed)
 end
