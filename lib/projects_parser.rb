@@ -8,20 +8,12 @@ class ProjectsParser
   end
 
   def should_include?(name)
-    if !@include_filters.empty?
-      @include_filters.each do |filter|
-        if name.include? filter
-          return true
-        end
-      end
-      return false
+    if @include_filters.empty?
+      @exclude_filters.each { |filter| return false if name.include? filter }
+      return true
     end
-    @exclude_filters.each do |filter|
-      if name.include? filter
-        return false
-      end
-    end
-    return true
+    @include_filters.each { |filter| return true if name.include? filter }
+    return false
   end
 
   def exclude(name)
