@@ -82,6 +82,31 @@ describe ProjectsParser do
 
       result.should == @expected
     end
+
+    it 'should filter by version' do
+      @expected['projects'] << @project1
+      @expected['projects'] << @project2
+
+      @parser.include_version('trunk')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
+
+    it 'should filter by a list of versions' do
+      @expected['projects'] << @project1
+      @expected['projects'] << @project2
+      @expected['projects'] << @project3
+
+      @parser.include_version('trunk')
+      @parser.include_version('1.0')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
+
   end
 
 
