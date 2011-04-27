@@ -7,15 +7,15 @@ describe ProjectsParser do
     before do
       @xml = %!
       <Projects>
-        <Project name='trunk-acoolname' lastBuildStatus='Success' />
-        <Project name='trunk-abettername' lastBuildStatus='Success' />
-        <Project name='1.0-anevenbettername' lastBuildStatus='Failure' />
+        <Project name='trunk-acoolname-quick' lastBuildStatus='Success' />
+        <Project name='trunk-abettername-package' lastBuildStatus='Success' />
+        <Project name='1.0-anevenbettername-regression' lastBuildStatus='Failure' />
       </Projects>
       !
 
-      @project1 = {'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success'}
-      @project2 = {'name' => 'abettername', 'version' => 'trunk', 'state' => 'success'}
-      @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure'}
+      @project1 = {'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'type' => 'quick'}
+      @project2 = {'name' => 'abettername', 'version' => 'trunk', 'state' => 'success', 'type' => 'package'}
+      @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'type' => 'regression'}
       @expected = {'projects' => []}
 
       @parser = ProjectsParser.new
@@ -83,7 +83,7 @@ describe ProjectsParser do
       result.should == @expected
     end
 
-    it 'should filter by version' do
+    it 'should include by version' do
       @expected['projects'] << @project1
       @expected['projects'] << @project2
 
@@ -94,13 +94,35 @@ describe ProjectsParser do
       result.should == @expected
     end
 
-    it 'should filter by a list of versions' do
+    it 'should include by a list of versions' do
       @expected['projects'] << @project1
       @expected['projects'] << @project2
       @expected['projects'] << @project3
 
       @parser.include_version('trunk')
       @parser.include_version('1.0')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
+
+    it 'should exclude by type' do
+      @expected['projects'] << @project1
+      @expected['projects'] << @project2
+
+      @parser.exclude_type('regression')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
+
+    it 'should exclude by a list of types' do
+      @expected['projects'] << @project1
+
+      @parser.exclude_type('package')
+      @parser.exclude_type('regression')
 
       result = @parser.parse @xml
 

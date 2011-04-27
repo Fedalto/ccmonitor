@@ -13,6 +13,7 @@ set :sessions, true
 get "/wall" do
   session[:include_names] = params[:include_names].split(',') unless params[:include_names].nil?
   session[:exclude_names] = params[:exclude_names].split(',') unless params[:exclude_names].nil?
+  session[:exclude_types] = params[:exclude_types].split(',') unless params[:exclude_types].nil?
   session[:versions] = params[:versions].split(',') unless params[:versions].nil?
   erb :wall
 end
@@ -22,6 +23,7 @@ get "/all_projects" do
   parser = ProjectsParser.new
   session[:include_names].each { |filter| parser.include_name(filter) } unless session[:include_names].nil?
   session[:exclude_names].each { |filter| parser.exclude_name(filter) } unless session[:exclude_names].nil?
+  session[:exclude_types].each { |filter| parser.exclude_type(filter) } unless session[:exclude_types].nil?
   session[:versions].each { |filter| parser.include_version(filter) } unless session[:versions].nil?
   JSON.generate(parser.parse xml_feed)
 end
