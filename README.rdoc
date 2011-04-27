@@ -2,11 +2,10 @@
 
 == Release 1
 * Two panel view
-* Inclusion filter
-* Exclusion filter
+* Filters
 
 == Possible Features
 * All builds
 * Grouped projects
 * Recently broken builds
-* Configuration Page
+* Filters on the top of the page
