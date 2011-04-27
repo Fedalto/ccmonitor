@@ -7,15 +7,15 @@ describe ProjectsParser do
     before do
       @xml = %!
       <Projects>
-        <Project name='a cool name' lastBuildStatus='Success' />
-        <Project name='a better name' lastBuildStatus='Success' />
-        <Project name='an even better name' lastBuildStatus='Failure' />
+        <Project name='trunk-acoolname' lastBuildStatus='Success' />
+        <Project name='trunk-abettername' lastBuildStatus='Success' />
+        <Project name='1.0-anevenbettername' lastBuildStatus='Failure' />
       </Projects>
       !
 
-      @project1 = {'name' => 'a cool name', 'state' => 'success'}
-      @project2 = {'name' => 'a better name', 'state' => 'success'}
-      @project3 = {'name' => 'an even better name', 'state' => 'failure'}
+      @project1 = {'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success'}
+      @project2 = {'name' => 'abettername', 'version' => 'trunk', 'state' => 'success'}
+      @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure'}
       @expected = {'projects' => []}
 
       @parser = ProjectsParser.new
@@ -34,7 +34,7 @@ describe ProjectsParser do
     it 'should exclude a project by a part of the name' do
       @expected['projects'] << @project1
 
-      @parser.exclude('better')
+      @parser.exclude_name('better')
 
       result = @parser.parse @xml
 
@@ -42,29 +42,41 @@ describe ProjectsParser do
     end
 
     it 'should exclude a list of projects by parts of the names' do
-      @parser.exclude('cool')
-      @parser.exclude('better')
+      @parser.exclude_name('cool')
+      @parser.exclude_name('better')
 
       result = @parser.parse @xml
 
       result.should == @expected
     end
 
-    it 'should include only the specified projects' do
+    it 'should include a project by a part of the name' do
       @expected['projects'] << @project1
 
-      @parser.include('cool')
+      @parser.include_name('cool')
 
       result = @parser.parse @xml
 
       result.should == @expected
     end
 
-    it 'include filters should have precedence' do
+    it 'should include a list of projects by parts of the names' do
+      @expected['projects'] << @project1
+      @expected['projects'] << @project3
+
+      @parser.include_name('cool')
+      @parser.include_name('even')
+
+      result = @parser.parse @xml
+
+      result.should == @expected
+    end
+
+    it 'include by name filters should have precedence over exclude by name filters' do
       @expected['projects'] << @project2
 
-      @parser.include('better')
-      @parser.exclude('even')
+      @parser.include_name('better')
+      @parser.exclude_name('even')
 
       result = @parser.parse @xml
 

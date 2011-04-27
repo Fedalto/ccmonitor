@@ -19,7 +19,7 @@ end
 get "/all_projects" do
   xml_feed = open(settings.CONFIG[:FEED_URL])
   parser = ProjectsParser.new
-  session[:include].each { |filter| parser.include(filter) } unless session[:include].nil?
-  session[:exclude].each { |filter| parser.exclude(filter) } unless session[:exclude].nil?
+  session[:include].each { |filter| parser.include_name(filter) } unless session[:include].nil?
+  session[:exclude].each { |filter| parser.exclude_name(filter) } unless session[:exclude].nil?
   JSON.generate(parser.parse xml_feed)
 end
