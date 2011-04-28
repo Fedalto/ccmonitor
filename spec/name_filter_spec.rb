@@ -69,4 +69,19 @@ describe NameFilter do
     result.should == @expected
   end
 
+  it 'should give preference to includes' do
+    @input['projects'] << @project1
+    @input['projects'] << @project2
+    @input['projects'] << @project3
+
+    @expected['projects'] << @project2
+
+    @filter.include('better')
+    @filter.exclude('even')
+
+    result = @filter.filter @input
+
+    result.should == @expected
+  end
+
 end
