@@ -4,16 +4,13 @@ require 'nokogiri'
 class ProjectsParser
 
   def initialize
-    @exclude_filters = []
     @include_filters = []
     @include_versions = []
     @exclude_types = []
   end
 
   def should_include_name?(name)
-    return @include_filters.empty? ?
-     !@exclude_filters.any? { |filter| name.include? filter } :
-     (@include_filters.any? { |filter| name.include? filter } and !@exclude_filters.any? { |filter| name.include? filter })
+    return @include_filters.empty? ? true : @include_filters.any? { |filter| name.include? filter }
   end
 
   def should_include_version?(version)
@@ -22,10 +19,6 @@ class ProjectsParser
 
   def should_include_type?(version)
     return @exclude_types.empty? ? true : !@exclude_types.any? { |filter| version == filter}
-  end
-
-  def exclude_name(name)
-    @exclude_filters << name  
   end
 
   def include_name(name)

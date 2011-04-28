@@ -1,4 +1,5 @@
 require 'lib/projects_parser'
+require 'lib/name_exclude_filter'
 require "rubygems"
 require "sinatra"
 require "open-uri"
@@ -22,8 +23,15 @@ get "/all_projects" do
   xml_feed = open(settings.CONFIG[:FEED_URL])
   parser = ProjectsParser.new
   session[:include_names].each { |filter| parser.include_name(filter) } unless session[:include_names].nil?
-  session[:exclude_names].each { |filter| parser.exclude_name(filter) } unless session[:exclude_names].nil?
   session[:exclude_types].each { |filter| parser.exclude_type(filter) } unless session[:exclude_types].nil?
   session[:versions].each { |filter| parser.include_version(filter) } unless session[:versions].nil?
-  JSON.generate(parser.parse xml_feed)
+
+  projects = parser.parse xml_feed
+
+  name_exclude_filter = NameExcludeFilter.new
+  session[:exclude_names].each { |name| name_exclude_filter.add(name) } unless session[:exclude_names].nil?
+
+  projects = name_exclude_filter.filter projects
+
+  JSON.generate(projects)
 end

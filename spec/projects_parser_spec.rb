@@ -31,25 +31,6 @@ describe ProjectsParser do
       result.should == @expected
     end
 
-    it 'should exclude a project by a part of the name' do
-      @expected['projects'] << @project1
-
-      @parser.exclude_name('better')
-
-      result = @parser.parse @xml
-
-      result.should == @expected
-    end
-
-    it 'should exclude a list of projects by parts of the names' do
-      @parser.exclude_name('cool')
-      @parser.exclude_name('better')
-
-      result = @parser.parse @xml
-
-      result.should == @expected
-    end
-
     it 'should include a project by a part of the name' do
       @expected['projects'] << @project1
 
@@ -66,17 +47,6 @@ describe ProjectsParser do
 
       @parser.include_name('cool')
       @parser.include_name('even')
-
-      result = @parser.parse @xml
-
-      result.should == @expected
-    end
-
-    it 'include by name filters should have precedence over exclude by name filters' do
-      @expected['projects'] << @project2
-
-      @parser.include_name('better')
-      @parser.exclude_name('even')
 
       result = @parser.parse @xml
 
