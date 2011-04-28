@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe NameExcludeFilter do
+describe NameFilter do
 
   before do
     @project1 = {'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'type' => 'quick'}
@@ -8,7 +8,7 @@ describe NameExcludeFilter do
     @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'type' => 'regression'}
     @input = {'projects' => []}
     @expected = {'projects' => []}
-    @filter = NameExcludeFilter.new
+    @filter = NameFilter.new
   end
 
   it 'should exclude a project by a part of the name' do
@@ -17,7 +17,7 @@ describe NameExcludeFilter do
 
     @expected['projects'] << @project1
 
-    @filter.add('better')
+    @filter.exclude('better')
 
     result = @filter.filter @input
 
@@ -31,8 +31,38 @@ describe NameExcludeFilter do
 
     @expected['projects'] << @project2
 
-    @filter.add('cool')
-    @filter.add('even')
+    @filter.exclude('cool')
+    @filter.exclude('even')
+
+    result = @filter.filter @input
+
+    result.should == @expected
+  end
+
+  it 'should include a project by a part of the name' do
+    @input['projects'] << @project1
+    @input['projects'] << @project2
+    @input['projects'] << @project3
+
+    @expected['projects'] << @project1
+
+    @filter.include('cool')
+
+    result = @filter.filter @input
+
+    result.should == @expected
+  end
+
+  it 'should include a list of projects by parts of the names' do
+    @input['projects'] << @project1
+    @input['projects'] << @project2
+    @input['projects'] << @project3
+
+    @expected['projects'] << @project1
+    @expected['projects'] << @project3
+
+    @filter.include('cool')
+    @filter.include('even')
 
     result = @filter.filter @input
 

@@ -31,28 +31,6 @@ describe ProjectsParser do
       result.should == @expected
     end
 
-    it 'should include a project by a part of the name' do
-      @expected['projects'] << @project1
-
-      @parser.include_name('cool')
-
-      result = @parser.parse @xml
-
-      result.should == @expected
-    end
-
-    it 'should include a list of projects by parts of the names' do
-      @expected['projects'] << @project1
-      @expected['projects'] << @project3
-
-      @parser.include_name('cool')
-      @parser.include_name('even')
-
-      result = @parser.parse @xml
-
-      result.should == @expected
-    end
-
     it 'should include by version' do
       @expected['projects'] << @project1
       @expected['projects'] << @project2

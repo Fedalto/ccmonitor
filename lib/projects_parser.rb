@@ -4,13 +4,8 @@ require 'nokogiri'
 class ProjectsParser
 
   def initialize
-    @include_filters = []
     @include_versions = []
     @exclude_types = []
-  end
-
-  def should_include_name?(name)
-    return @include_filters.empty? ? true : @include_filters.any? { |filter| name.include? filter }
   end
 
   def should_include_version?(version)
@@ -19,10 +14,6 @@ class ProjectsParser
 
   def should_include_type?(version)
     return @exclude_types.empty? ? true : !@exclude_types.any? { |filter| version == filter}
-  end
-
-  def include_name(name)
-    @include_filters << name
   end
 
   def include_version(version)
@@ -39,15 +30,13 @@ class ProjectsParser
       version = project.get_attribute('name').split("-")[0]
       name = project.get_attribute('name').split("-")[1]
       type = project.get_attribute('name').split("-")[2]
-      if should_include_name? name
-        if should_include_version? version
-          if should_include_type? type
-            proj = {'name' => name}
-            proj['state'] = project.get_attribute('lastBuildStatus').downcase!
-            proj['version'] = version
-            proj['type'] = type
-            @data['projects'] << proj
-          end
+      if should_include_version? version
+        if should_include_type? type
+          proj = {'name' => name}
+          proj['state'] = project.get_attribute('lastBuildStatus').downcase!
+          proj['version'] = version
+          proj['type'] = type
+          @data['projects'] << proj
         end
       end
     end
