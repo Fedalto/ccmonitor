@@ -9,3 +9,6 @@
 * Grouped projects
 * Recently broken builds
 * Filters on the top of the page
+* Highlight broken for too long
+* Highlight not running for too long
+* Get the real feeds

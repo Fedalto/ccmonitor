@@ -7,11 +7,11 @@ html, html *, * {
   font-size: 10pt;
 }
 
-div.cell { margin: 10px; color: #f2f2f2; text-align: center; display: inline-block; }
+div.cell { margin: 10px; color: #f2f2f2; text-align: center; display: inline-block; overflow: hidden; }
 
 div.cell.failure { 
   background: #a04040; 
-  width: 200px; height: 100px; line-height: 100px;
+  width: 200px; height: 100px; line-height: 100px; position: relative; 
 }
 
 div.cell.success { 
@@ -21,10 +21,10 @@ div.cell.success {
 }
 
 div.cell.success h4 { font-size: 7pt; }
-div.cell.failure h4 { font-size: 14pt; }
+div.cell.failure h4 { font-size: 14pt; position: absolute; }
 
 div.cell.success h5 { font-size: 7pt; }
-div.cell.failure h5 { font-size: 14pt; }
+div.cell.failure h5 { font-size: 10px; line-height: 10px; position: absolute; bottom: 0; right: 0;}
 
-div#success_box { float: left; width: auto; }
+div#success_box { float: left; width: auto; position: relative; }
 div#failure_box { float: left; width: auto; }

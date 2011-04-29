@@ -12,8 +12,8 @@ class ProjectsParser
     return @include_versions.empty? ? true : @include_versions.any? { |filter| version == filter}
   end
 
-  def should_include_type?(version)
-    return @exclude_types.empty? ? true : !@exclude_types.any? { |filter| version == filter}
+  def should_include_type?(type)
+    return @exclude_types.empty? ? true : !@exclude_types.any? { |filter| type.include? filter}
   end
 
   def include_version(version)
@@ -28,8 +28,9 @@ class ProjectsParser
     @data = {'projects' => []}
     Nokogiri::XML(xml).xpath('//Project').each do |project|
       version = project.get_attribute('name').split("-")[0]
-      name = project.get_attribute('name').split("-")[1]
-      type = project.get_attribute('name').split("-")[2]
+      cdr = project.get_attribute('name').split("-")[1..-1].join('.')
+      name = cdr.split('.')[0]
+      type = cdr.split('.')[1..-1].join('.')
       if should_include_version? version
         if should_include_type? type
           proj = {'name' => name}

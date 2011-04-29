@@ -9,13 +9,13 @@ describe ProjectsParser do
       <Projects>
         <Project name='trunk-acoolname-quick' lastBuildStatus='Success' />
         <Project name='trunk-abettername-package' lastBuildStatus='Success' />
-        <Project name='1.0-anevenbettername-regression' lastBuildStatus='Failure' />
+        <Project name='1.0-anevenbettername.isolated-test' lastBuildStatus='Failure' />
       </Projects>
       !
 
       @project1 = {'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'type' => 'quick'}
       @project2 = {'name' => 'abettername', 'version' => 'trunk', 'state' => 'success', 'type' => 'package'}
-      @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'type' => 'regression'}
+      @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'type' => 'isolated.test'}
       @expected = {'projects' => []}
 
       @parser = ProjectsParser.new
@@ -59,7 +59,7 @@ describe ProjectsParser do
       @expected['projects'] << @project1
       @expected['projects'] << @project2
 
-      @parser.exclude_type('regression')
+      @parser.exclude_type('isolated')
 
       result = @parser.parse @xml
 
@@ -70,7 +70,7 @@ describe ProjectsParser do
       @expected['projects'] << @project1
 
       @parser.exclude_type('package')
-      @parser.exclude_type('regression')
+      @parser.exclude_type('isolated')
 
       result = @parser.parse @xml
 
