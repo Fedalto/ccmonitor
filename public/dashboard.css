@@ -6,17 +6,25 @@ html, html *, * {
   text-decoration: none;
   font-size: 10pt;
 }
+
 div.cell { margin: 10px; color: #f2f2f2; text-align: center; display: inline-block; }
+
 div.cell.failure { 
   background: #a04040; 
   width: 200px; height: 100px; line-height: 100px;
 }
+
 div.cell.success { 
   background: #40a860; 
   width: 60px; height: 30px; line-height: 30px;
   margin: 10px 2px;
 }
+
 div.cell.success h4 { font-size: 7pt; }
 div.cell.failure h4 { font-size: 14pt; }
+
+div.cell.success h5 { font-size: 7pt; }
+div.cell.failure h5 { font-size: 14pt; }
+
 div#success_box { float: left; width: auto; }
 div#failure_box { float: left; width: auto; }

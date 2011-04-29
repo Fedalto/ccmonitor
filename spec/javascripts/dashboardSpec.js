@@ -44,7 +44,7 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({project: 'AwesomeProject', state: dashboard.state.failure});
+    cell = dashboard.cell({project: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick'});
   });
 
   it("should know its project and state", function () {
@@ -52,8 +52,17 @@ describe("a cell", function () {
     expect(cell.state()).toEqual(dashboard.state.failure);
   });
 
+  it("should know its type", function () {
+    expect(cell.type()).toEqual('quick');
+  });
+
   it("should contain a header with the project name", function () {
     expect(cell.element().find('h4').html()).toEqual(cell.project());
+  });
+
+  it("should contain a header with the build type", function () {
+    expect(cell.element().find('h5').size()).toEqual(1);
+    expect(cell.element().find('h5').html()).toEqual(cell.type());
   });
   
   it("should move itself to the correct container at creation time", function () {
@@ -105,10 +114,10 @@ describe("manager", function () {
   beforeEach(function () {
     sandbox.createWithContainers();
     json = '{"projects": [' + 
-      '{"name": "Awesome Project", "state": "success"}, ' +
-      '{"name": "Fun Project", "state": "success"}, ' +
-      '{"name": "Great Project", "state": "success"}, ' +
-      '{"name": "Interesting Project", "state": "failure"} ' +
+      '{"name": "Awesome Project", "state": "success", "type": "quick"}, ' +
+      '{"name": "Fun Project", "state": "success", "type": "quick"}, ' +
+      '{"name": "Great Project", "state": "success", "type": "metrics"}, ' +
+      '{"name": "Interesting Project", "state": "failure", "type": "package"} ' +
     ']}';
     ajaxMock = { get: function (url, callback) { callback(json); } };
     marco = dashboard.manager({ajax: ajaxMock});
@@ -139,6 +148,7 @@ describe("manager", function () {
     marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
 
     expect(marco.cells()[0].project()).toEqual("Awesome Project");
+    expect(marco.cells()[0].type()).toEqual("quick");
   });
 
 });

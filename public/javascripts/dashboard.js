@@ -28,10 +28,12 @@ dashboard.containers = (function () {
 dashboard.cell = function (specs) {
   var state = specs.state, 
       project = specs.project,
+      type = specs.type,
       element = null,
       api = {};
 
   api.project = function () { return project; };
+  api.type = function () { return type; };
   
   function refreshPlacement() {
     api.element().appendTo(dashboard.containers[state]());
@@ -49,6 +51,7 @@ dashboard.cell = function (specs) {
     element = element || $("<div/>", { 'class': state }).addClass("cell"); 
     element.empty();
     element.append($('<h4>', {'html': project}));
+    element.append($('<h5>', {'html': type}));
     return element;
   };
 
@@ -60,12 +63,12 @@ dashboard.cell = function (specs) {
 dashboard.manager = function (specs) {
   var api = {},
       config = specs || {}
-      ajax = config.ajax || dashboard.ajax, //improve this
+      ajax = config.ajax || dashboard.ajax,
       uris = config.uris || {refresh: "/all_projects" },
       cells = []; 
 
   function createCell(project) {
-    return dashboard.cell({project: project.name, state: project.state});
+    return dashboard.cell({project: project.name, state: project.state, type: project.type});
   }
 
   function resetState() {
