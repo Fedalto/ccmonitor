@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'spec/spec_helper'
 
 describe ProjectsParser do
 
@@ -51,6 +51,5 @@ describe ProjectsParser do
     end
 
   end
-
 
 end
