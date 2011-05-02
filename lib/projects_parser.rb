@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'nokogiri'
-
 class ProjectsParser
 
   def initialize

@@ -1,5 +1,3 @@
-require 'rubygems'
-
 class NameFilter
 
   def initialize
