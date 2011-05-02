@@ -22,11 +22,7 @@ class NameFilter
   end
 
   def filter(projects)
-    result = {'projects' => []}    
-    projects['projects'].each do |project|
-      result['projects'] << project if should_include? project
-    end
-    result
+    projects.select { |project| should_include? project }
   end
 
 end

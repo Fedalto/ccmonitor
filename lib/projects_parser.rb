@@ -25,7 +25,7 @@ class ProjectsParser
   end
 
   def parse(xml)
-    @data = {'projects' => []}
+    @data = []
     Nokogiri::XML(xml).xpath('//Project').each do |project|
       version = project.get_attribute('name').split("-")[0]
       cdr = project.get_attribute('name').split("-")[1..-1].join('.')
@@ -37,7 +37,7 @@ class ProjectsParser
           proj['state'] = project.get_attribute('lastBuildStatus').downcase!
           proj['version'] = version
           proj['type'] = type
-          @data['projects'] << proj
+          @data << proj
         end
       end
     end

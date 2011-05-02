@@ -31,7 +31,7 @@ get "/all_projects" do
   session[:exclude_names].each { |name| name_exclude_filter.exclude(name) } unless session[:exclude_names].nil?
   session[:include_names].each { |name| name_exclude_filter.include(name) } unless session[:include_names].nil?
 
-  projects = name_exclude_filter.filter projects
+  filtered_projects = name_exclude_filter.filter projects
 
-  JSON.generate(projects)
+  JSON.generate({:projects => filtered_projects})
 end
