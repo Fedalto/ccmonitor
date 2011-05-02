@@ -34,7 +34,7 @@ class ProjectsParser
       if should_include_version? version
         if should_include_type? type
           proj = {'name' => name}
-          proj['state'] = project.get_attribute('lastBuildStatus').downcase!
+          proj['state'] = project.get_attribute('lastBuildStatus').downcase
           proj['version'] = version
           proj['type'] = type
           @data << proj
