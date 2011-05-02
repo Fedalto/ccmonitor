@@ -1,11 +1,11 @@
 require 'bundler'
+
 require 'jasmine'
 load 'jasmine/tasks/jasmine.rake'
-
 Bundler::GemHelper.install_tasks
 
-task :default => :test
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new :spec
 
-task :test do
-  sh 'bundle exec rspec spec'
-end
+task :default => :spec
+
