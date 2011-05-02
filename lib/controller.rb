@@ -1,16 +1,3 @@
-require 'lib/projects_parser'
-require 'lib/name_filter'
-require "rubygems"
-require "sinatra"
-require "open-uri"
-require "yaml"
-require 'json'
-
-set :CONFIG, YAML.load(File.read("config/config.yml"))
-set :root,  File.join(File.dirname(__FILE__), "..")
-set :static, true
-set :sessions, true
-
 get "/wall" do
   session[:include_names] = params[:include_names].split(',') unless params[:include_names].nil?
   session[:exclude_names] = params[:exclude_names].split(',') unless params[:exclude_names].nil?
