@@ -79,7 +79,6 @@ dashboard.manager = function (specs) {
   function populateCells(input) {
     resetState();
     var json = $.parseJSON(input);
-    console.log(json);
     $(json.projects).each(function (index, project) {
       cells.push(createCell(project));
     });
