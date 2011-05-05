@@ -6,7 +6,10 @@ gemspec
 gem 'sinatra'
 gem 'nokogiri'
 gem 'json'
+gem 'activesupport', :require => 'active_support'
+gem 'thin'
 
 group :test do
   gem 'rspec'
+  gem 'capybara'
 end
