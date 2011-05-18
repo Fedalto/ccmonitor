@@ -34,6 +34,7 @@ class ProjectsParser
           proj['state'] = project.get_attribute('lastBuildStatus').downcase
           proj['version'] = version
           proj['type'] = type
+          proj['buildUrl'] = project.get_attribute('webUrl')
           @data << proj
         end
       end
