@@ -30,6 +30,8 @@ dashboard.cell = function (specs) {
       project = specs.name,
       type = specs.type,
       buildUrl = specs.buildUrl,
+      assignUrl = specs.assignUrl,
+      assignedTo = specs.assignedTo,
       element = null,
       api = {};
 
@@ -48,8 +50,30 @@ dashboard.cell = function (specs) {
   api.element = function () {
     element = element || $("<div/>", { 'class': state }).addClass("cell"); 
     element.empty();
-    element.append($('<a>', {'href': buildUrl}).append($('<h4>', {'html': project})));
-    element.append($('<h5>', {'html': type}));
+
+    state === 'failure' && element.append($('<div>', { 'class': 'rightAlign' })
+      .append($('<a>', { 
+        href: assignUrl,
+        html: assignedTo
+      }))
+    );
+
+    element.append($('<div>')
+      .append($('<a>', { 
+        href: buildUrl,
+      })
+        .append($('<h4>', {
+          html: project
+        }))
+      )
+    );
+
+    state === 'failure' && element.append($('<div>')
+      .append($('<h5>', { 
+        html: type
+      }))
+    );
+    
     return element;
   };
 

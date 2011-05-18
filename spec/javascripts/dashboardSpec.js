@@ -55,6 +55,16 @@ describe("a cell", function () {
     expect(cell.element().find('h5').size()).toEqual(1);
     expect(cell.element().find('h5').html()).toEqual("quick");
   });
+
+  it("should contain the name of the project as a link the build page", function () {
+    expect(cell.element().find('a')[1].href).toMatch("someUrl");
+    expect(cell.element().find('a')[1].innerHTML).toMatch("<h4>" + "AwesomeProject" + "</h4>");
+  });
+
+  it("should contain a link to the assign page", function () {
+    expect(cell.element().find('a')[0].href).toMatch('assignUrl');
+    expect(cell.element().find('a')[0].innerHTML).toMatch('person');
+  });
   
   it("should move itself to the correct container at creation time", function () {
     expect(cell.element().parent().attr("id")).toEqual("failure_box");
@@ -65,8 +75,6 @@ describe("a cell", function () {
     expect(cell.element().attr("tagName")).toEqual("DIV");
     expect(cell.element().attr("class")).toMatch(cell.state());
     expect(cell.element().attr("class")).toMatch("cell");
-    expect(cell.element().children('a')[0].href).toMatch("someUrl");
-    expect(cell.element().children('a')[0].innerHTML).toMatch("<h4>" + "AwesomeProject" + "</h4>");
   });
 
   it("should create a single element", function () {

@@ -9,7 +9,7 @@
              lastBuildLabel="autofeed-11.01.2"
              lastBuildTime="2011-01-25T22:55:40"
              webUrl="http://sfci-l06.gid.gap.com:8080/buildresults/11.01-autofeed-package"
-			 assignedTo=""
+			 assignedTo="duda"
              assignUrl="http://metrics.gid.gap.com/build_results/edit_build?build_project_name=11.01-autofeed-package"/> 
         
         <Project name="11.01-autofeed-quick"
