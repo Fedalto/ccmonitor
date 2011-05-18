@@ -35,6 +35,8 @@ class ProjectsParser
           proj['version'] = version
           proj['type'] = type
           proj['buildUrl'] = project.get_attribute('webUrl')
+          proj['assignedTo'] = project.get_attribute('assignedTo')
+          proj['assignUrl'] = project.get_attribute('assignUrl')
           @data << proj
         end
       end
