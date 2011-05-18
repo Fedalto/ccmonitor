@@ -54,6 +54,7 @@ dashboard.cell = function (specs) {
     state === 'failure' && element.append($('<div>', { 'class': 'rightAlign' })
       .append($('<a>', { 
         href: assignUrl,
+        target: "_blank",
         html: assignedTo
       }))
     );
@@ -61,6 +62,7 @@ dashboard.cell = function (specs) {
     element.append($('<div>')
       .append($('<a>', { 
         href: buildUrl,
+        target: "_blank"
       })
         .append($('<h4>', {
           html: project
