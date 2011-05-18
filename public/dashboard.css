@@ -21,8 +21,8 @@ div.cell.success {
 }
 
 div.cell.success h4 { font-size: 7pt; }
-div.cell.failure h4 { font-size: 14pt; position: absolute; }
-
+div.cell.failure h4 { font-size: 14pt; text-align: center; }
+div.cell a { color: white }  
 div.cell.success h5 { font-size: 7pt; }
 div.cell.failure h5 { font-size: 10px; line-height: 10px; position: absolute; bottom: 0; right: 0;}
 

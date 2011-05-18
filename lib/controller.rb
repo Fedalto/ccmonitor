@@ -21,6 +21,5 @@ get "/all_projects" do
   session[:include_names].each { |name| name_exclude_filter.include(name) } unless session[:include_names].nil?
 
   filtered_projects = name_exclude_filter.filter projects
-
   JSON.generate({:projects => filtered_projects})
 end

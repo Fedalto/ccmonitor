@@ -44,7 +44,7 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({project: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick'});
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick', 'buildUrl': 'someUrl'});
   });
 
   it("should know its project and state", function () {
@@ -54,6 +54,10 @@ describe("a cell", function () {
 
   it("should know its type", function () {
     expect(cell.type()).toEqual('quick');
+  });
+
+  it("should know the project build page", function () {
+    expect(cell.buildUrl()).toEqual('someUrl');
   });
 
   it("should contain a header with the project name", function () {
@@ -74,6 +78,8 @@ describe("a cell", function () {
     expect(cell.element().attr("tagName")).toEqual("DIV");
     expect(cell.element().attr("class")).toMatch(cell.state());
     expect(cell.element().attr("class")).toMatch("cell");
+    expect(cell.element().children('a')[0].href).toMatch(cell.buildUrl());
+    expect(cell.element().children('a')[0].innerHTML).toMatch("<h4>" + cell.project() + "</h4>");
   });
 
   it("should create a single element", function () {

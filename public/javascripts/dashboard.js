@@ -27,13 +27,15 @@ dashboard.containers = (function () {
 
 dashboard.cell = function (specs) {
   var state = specs.state, 
-      project = specs.project,
+      project = specs.name,
       type = specs.type,
+      buildUrl = specs.buildUrl,
       element = null,
       api = {};
 
   api.project = function () { return project; };
   api.type = function () { return type; };
+  api.buildUrl = function () { return buildUrl; };
   
   function refreshPlacement() {
     api.element().appendTo(dashboard.containers[state]());
@@ -50,7 +52,7 @@ dashboard.cell = function (specs) {
   api.element = function () {
     element = element || $("<div/>", { 'class': state }).addClass("cell"); 
     element.empty();
-    element.append($('<h4>', {'html': project}));
+    element.append($('<a>', {'href': buildUrl}).append($('<h4>', {'html': project})));
     element.append($('<h5>', {'html': type}));
     return element;
   };
@@ -68,7 +70,7 @@ dashboard.manager = function (specs) {
       cells = []; 
 
   function createCell(project) {
-    return dashboard.cell({project: project.name, state: project.state, type: project.type});
+    return dashboard.cell(project)
   }
 
   function resetState() {

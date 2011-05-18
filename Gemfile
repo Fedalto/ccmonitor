@@ -12,4 +12,5 @@ gem 'thin'
 group :test do
   gem 'rspec'
   gem 'capybara'
+  gem 'ruby-debug'
 end
