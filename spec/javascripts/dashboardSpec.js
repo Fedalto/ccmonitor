@@ -44,29 +44,16 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick', 'buildUrl': 'someUrl'});
-  });
-
-  it("should know its project and state", function () {
-    expect(cell.project()).toEqual('AwesomeProject');
-    expect(cell.state()).toEqual(dashboard.state.failure);
-  });
-
-  it("should know its type", function () {
-    expect(cell.type()).toEqual('quick');
-  });
-
-  it("should know the project build page", function () {
-    expect(cell.buildUrl()).toEqual('someUrl');
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick', 'buildUrl': 'someUrl', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
   });
 
   it("should contain a header with the project name", function () {
-    expect(cell.element().find('h4').html()).toEqual(cell.project());
+    expect(cell.element().find('h4').html()).toEqual("AwesomeProject");
   });
 
   it("should contain a header with the build type", function () {
     expect(cell.element().find('h5').size()).toEqual(1);
-    expect(cell.element().find('h5').html()).toEqual(cell.type());
+    expect(cell.element().find('h5').html()).toEqual("quick");
   });
   
   it("should move itself to the correct container at creation time", function () {
@@ -78,8 +65,8 @@ describe("a cell", function () {
     expect(cell.element().attr("tagName")).toEqual("DIV");
     expect(cell.element().attr("class")).toMatch(cell.state());
     expect(cell.element().attr("class")).toMatch("cell");
-    expect(cell.element().children('a')[0].href).toMatch(cell.buildUrl());
-    expect(cell.element().children('a')[0].innerHTML).toMatch("<h4>" + cell.project() + "</h4>");
+    expect(cell.element().children('a')[0].href).toMatch("someUrl");
+    expect(cell.element().children('a')[0].innerHTML).toMatch("<h4>" + "AwesomeProject" + "</h4>");
   });
 
   it("should create a single element", function () {
@@ -153,8 +140,7 @@ describe("manager", function () {
   it("should create the cells using the ajax response", function () {
     marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
 
-    expect(marco.cells()[0].project()).toEqual("Awesome Project");
-    expect(marco.cells()[0].type()).toEqual("quick");
+    expect(marco.cells().length).toEqual(4)
   });
 
 });

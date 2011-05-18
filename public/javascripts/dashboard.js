@@ -33,10 +33,6 @@ dashboard.cell = function (specs) {
       element = null,
       api = {};
 
-  api.project = function () { return project; };
-  api.type = function () { return type; };
-  api.buildUrl = function () { return buildUrl; };
-  
   function refreshPlacement() {
     api.element().appendTo(dashboard.containers[state]());
   }  
