@@ -4,6 +4,9 @@
 * Two panel view
 * Filters
 
+== Release 2
+* Auto refresh
+
 == Possible Features
 * All builds
 * Grouped projects

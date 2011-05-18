@@ -1,3 +1,5 @@
+require 'open-uri'
+
 get "/wall" do
   session[:include_names] = params[:include_names].split(',') unless params[:include_names].nil?
   session[:exclude_names] = params[:exclude_names].split(',') unless params[:exclude_names].nil?
