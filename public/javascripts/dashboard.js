@@ -88,7 +88,7 @@ dashboard.manager = function (specs) {
   var api = {},
       config = specs || {}
       ajax = config.ajax || dashboard.ajax,
-      uris = config.uris || {refresh: "/all_projects" },
+      uris = config.uris || {refresh: "/all_projects" + window.location.href.slice(window.location.href.indexOf('?')) },
       cells = []; 
 
   function createCell(project) {
