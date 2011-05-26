@@ -1,6 +1,6 @@
 require 'spec/spec_helper'
 
-describe NameFilter do
+describe AttributeFilter do
 
   before do
     @project1 = {'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'type' => 'quick'}
@@ -8,9 +8,9 @@ describe NameFilter do
     @project3 = {'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'type' => 'regression'}
   end
 
-  let (:filter) { NameFilter.new }
+  let (:filter) { AttributeFilter.new 'name'}
 
-  it 'should exclude a project by a part of the name' do
+  it 'should exclude a project by a part of an attribute' do
     filter.exclude('better')
 
     filter.filter([ @project1, @project2 ]).should == [ @project1 ]
