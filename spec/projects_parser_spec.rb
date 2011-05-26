@@ -37,19 +37,6 @@ describe ProjectsParser do
       @parser.parse(@xml).should == [ @project1, @project2, @project3 ]
     end
 
-    it 'should exclude by type' do
-      @parser.exclude_type('isolated')
-
-      @parser.parse(@xml).should == [ @project1, @project2 ]
-    end
-
-    it 'should exclude by a list of types' do
-      @parser.exclude_type('package')
-      @parser.exclude_type('isolated')
-
-      @parser.parse(@xml).should == [ @project1 ]
-    end
-
   end
 
 end
