@@ -13,10 +13,10 @@ get "/all_projects" do
 
   projects = parser.parse xml_feed
 
-  name_exclude_filter = NameFilter.new
-  params[:exclude_names].split(',').each { |name| name_exclude_filter.exclude(name) } unless params[:exclude_names].nil?
-  params[:include_names].split(',').each { |name| name_exclude_filter.include(name) } unless params[:include_names].nil?
+  name_filter = NameFilter.new
+  params[:exclude_names].split(',').each { |name| name_filter.exclude(name) } unless params[:exclude_names].nil?
+  params[:include_names].split(',').each { |name| name_filter.include(name) } unless params[:include_names].nil?
 
-  filtered_projects = name_exclude_filter.filter projects
+  filtered_projects = name_filter.filter projects
   JSON.generate({:projects => filtered_projects})
 end
