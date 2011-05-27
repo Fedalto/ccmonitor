@@ -1,5 +1,8 @@
 = CC Monitor
 
+== Running CCMonitor
+unicorn -p 4567
+
 == Release 1
 * Two panel view
 * Filters

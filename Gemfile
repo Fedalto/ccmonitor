@@ -7,7 +7,7 @@ gem 'sinatra'
 gem 'nokogiri'
 gem 'json'
 gem 'activesupport', :require => 'active_support'
-gem 'thin'
+gem 'unicorn'
 
 group :test do
   gem 'rspec'
