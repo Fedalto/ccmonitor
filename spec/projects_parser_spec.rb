@@ -24,19 +24,6 @@ describe ProjectsParser do
       @parser.parse(@xml).should == [ @project1, @project2, @project3 ]
     end
 
-    it 'should include by version' do
-      @parser.include_version('trunk')
-
-      @parser.parse(@xml).should == [ @project1, @project2 ]
-    end
-
-    it 'should include by a list of versions' do
-      @parser.include_version('trunk')
-      @parser.include_version('1.0')
-
-      @parser.parse(@xml).should == [ @project1, @project2, @project3 ]
-    end
-
   end
 
 end
