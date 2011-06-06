@@ -70,7 +70,7 @@ dashboard.cell = function (specs) {
       )
     );
 
-    state === 'failure' && element.append($('<div>')
+    element.append($('<div>')
       .append($('<h5>', { 
         html: type
       }))
