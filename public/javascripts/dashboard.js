@@ -48,7 +48,7 @@ dashboard.cell = function (specs) {
   };
 
   api.element = function () {
-    element = element || $("<div/>", { 'class': state }).addClass("cell"); 
+    element = element || $("<div/>", { 'class': state }).addClass("cell").addClass(type); 
     element.empty();
 
     state === 'failure' && element.append($('<div>', { 'class': 'rightAlign' })
