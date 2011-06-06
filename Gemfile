@@ -8,6 +8,7 @@ gem 'nokogiri'
 gem 'json'
 gem 'activesupport', :require => 'active_support'
 gem 'unicorn'
+gem 'rake'
 
 group :test do
   gem 'rspec'
