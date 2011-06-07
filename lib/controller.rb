@@ -12,20 +12,22 @@ class App < Sinatra::Application
     parser = ProjectsParser.new
     projects = parser.parse xml_feed
 
-    name_filter = AttributeFilter.new 'name'
-    params[:exclude_names].split(',').each { |name| name_filter.exclude(name) } unless params[:exclude_names].nil?
-    params[:include_names].split(',').each { |name| name_filter.include(name) } unless params[:include_names].nil?
-
-    type_filter = AttributeFilter.new 'type'
-    params[:include_types].split(',').each { |type| type_filter.include(type) } unless params[:include_types].nil?
-    params[:exclude_types].split(',').each { |type| type_filter.exclude(type) } unless params[:exclude_types].nil?
-
-    version_filter = AttributeFilter.new 'version'
-    params[:include_versions].split(',').each { |version| version_filter.include(version) } unless params[:include_versions].nil?
-    params[:exclude_versions].split(',').each { |version| version_filter.exclude(version) } unless params[:exclude_versions].nil?
+    name_filter = create_filter :attribute => 'name', :include_exclude_param => 'names'
+    type_filter = create_filter :attribute => 'type', :include_exclude_param => 'types'
+    version_filter = create_filter :attribute => 'version', :include_exclude_param => 'versions'
 
     filtered_projects = version_filter.filter(type_filter.filter(name_filter.filter projects))
     JSON.generate({:projects => filtered_projects})
   end
 
+  private
+  def create_filter(details = {:attribute => nil, :include_exclude_param => nil})
+    filter = AttributeFilter.new details[:attribute]
+    includes = params["include_#{details[:include_exclude_param]}".to_sym]
+    excludes = params["exclude_#{details[:include_exclude_param]}".to_sym]
+
+    includes.split(',').each { |value| filter.include(value) } unless includes.nil?
+    excludes.split(',').each { |value| filter.exclude(value) } unless excludes.nil?
+    filter
+  end
 end
