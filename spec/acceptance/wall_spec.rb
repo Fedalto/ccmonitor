@@ -1,7 +1,7 @@
 require 'spec/spec_helper'
 
 describe 'wall' do
-  before { visit '/wall?' }
+  before { visit '/wall' }
 
   it 'should show failure box' do
     page.should have_xpath "//div[@id='failure_box']"

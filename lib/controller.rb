@@ -2,6 +2,10 @@ require 'open-uri'
 
 class App < Sinatra::Application
 
+  get "/" do
+    redirect to("/wall")
+  end
+
   get "/wall" do
     erb :wall
   end

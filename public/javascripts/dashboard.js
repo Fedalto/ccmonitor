@@ -88,7 +88,8 @@ dashboard.manager = function (specs) {
   var api = {},
       config = specs || {}
       ajax = config.ajax || dashboard.ajax,
-      uris = config.uris || {refresh: "/all_projects" + window.location.href.slice(window.location.href.indexOf('?')) },
+      startOfParams = window.location.href.indexOf('?'),
+      uris = config.uris || {refresh: '/all_projects' + (startOfParams == -1 ? '' : window.location.href.slice(startOfParams))},
       cells = []; 
 
   function createCell(project) {
