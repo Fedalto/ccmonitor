@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ccmonitor (0.0.0)
+    ccmonitor (1.0.1)
       nokogiri
       sinatra
 
