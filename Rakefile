@@ -2,7 +2,6 @@ require 'bundler'
 
 require 'jasmine'
 load 'jasmine/tasks/jasmine.rake'
-Bundler::GemHelper.install_tasks
 
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new :spec

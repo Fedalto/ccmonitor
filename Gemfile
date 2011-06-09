@@ -8,6 +8,7 @@ gem 'unicorn'
 gem 'rake'
 
 group :test do
+  gem 'jasmine'
   gem 'capybara'
   gem 'ruby-debug'
 end
