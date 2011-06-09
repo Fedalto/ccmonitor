@@ -1,8 +1,5 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in ccmonitor.gemspec
-gemspec
-
 gem 'sinatra'
 gem 'nokogiri'
 gem 'json'
@@ -11,7 +8,11 @@ gem 'unicorn'
 gem 'rake'
 
 group :test do
-  gem 'rspec'
   gem 'capybara'
   gem 'ruby-debug'
+end
+
+group :development, :test do
+  gem 'rspec'
+  gem 'capistrano'
 end
