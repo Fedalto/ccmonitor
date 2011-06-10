@@ -1,18 +1,18 @@
 require 'bundler/capistrano'
 
-set :user, "juanibiapina"
-set :app_server, "localhost"
+set :user, "eggbuild"
+set :app_server, "metrics.gid.gap.com"
 
 set :application, "ccmonitor"
 set :branch, "master"
 set :scm, :git
-set :deploy_to, "/home/#{user}/#{application}"
+set :deploy_to, "#{ENV['HOME']}/#{application}"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/tmp/ccmonitor.pid"
 set :use_sudo, false
+set :repository, "https://github.com/juanibiapina/ccmonitor.git"
 
 server app_server, :app
-set :repository, "https://github.com/juanibiapina/ccmonitor.git"
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
