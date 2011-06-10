@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 set :user, "eggbuild"
 set :app_server, "metrics.gid.gap.com"
 
-set :application, "ccmonitor2"
+set :application, "ccmonitor"
 set :branch, "master"
 set :scm, :git
 set :deploy_to, "/home/#{user}/#{application}"
