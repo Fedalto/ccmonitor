@@ -20,7 +20,7 @@ ENV['GIT_SSL_NO_VERIFY'] = 'true'
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E production -D"
+    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E production -p 3456 -D"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do
