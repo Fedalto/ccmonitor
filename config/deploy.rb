@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 set :user, "eggbuild"
 set :app_server, "metrics.gid.gap.com"
 
-set :application, "ccmonitor"
+set :application, "ccmonitor2"
 set :branch, "master"
 set :scm, :git
 set :deploy_to, "#{ENV['HOME']}/#{application}"
@@ -13,6 +13,10 @@ set :use_sudo, false
 set :repository, "https://github.com/juanibiapina/ccmonitor.git"
 
 server app_server, :app
+
+ENV['HTTP_PROXY'] = "https://qaproxy.gid.gap.com:8080"
+ENV['HTTPS_PROXY'] = "https://qaproxy.gid.gap.com:8080"
+ENV['GIT_SSL_NO_VERIFY'] = 'true'
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
