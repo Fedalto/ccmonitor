@@ -7,7 +7,7 @@
 #
 # See http://unicorn.bogomips.org/Unicorn/Configurator.html for complete
 # documentation.
-APP_PATH = "/home/eggbuild/ccmonitor"
+APP_PATH = "#{ENV['HOME']}/ccmonitor"
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.
 worker_processes 2
