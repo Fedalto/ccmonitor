@@ -11,11 +11,8 @@ set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/tmp/ccmonitor.pid"
 set :use_sudo, false
 set :repository, "https://github.com/juanibiapina/ccmonitor.git"
-set :gateway, "https://qaproxy.gid.gap.com:8080"
 
 server app_server, :app
-
-#ENV['GIT_SSL_NO_VERIFY'] = 'true'
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
