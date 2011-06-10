@@ -6,7 +6,7 @@ set :app_server, "metrics.gid.gap.com"
 set :application, "ccmonitor2"
 set :branch, "master"
 set :scm, :git
-set :deploy_to, "#{ENV['HOME']}/#{application}"
+set :deploy_to, "/home/#{user}/#{application}"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/tmp/ccmonitor.pid"
 set :use_sudo, false
