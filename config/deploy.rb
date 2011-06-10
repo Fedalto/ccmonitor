@@ -16,7 +16,7 @@ server app_server, :app
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E production -p 3456 -D"
+    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E production -D"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do
