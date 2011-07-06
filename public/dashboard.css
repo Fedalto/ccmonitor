@@ -36,3 +36,5 @@ div.cell.failure h5 { font-size: 10px; }
 
 div#success_box { float: left; width: auto; }
 div#failure_box { float: left; width: auto; }
+
+div#sounds { display: none; }
