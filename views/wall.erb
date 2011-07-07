@@ -6,14 +6,14 @@
     <script type="text/javascript" language="javascript" charset="utf-8">
       $(function () { 
           var marco = dashboard.manager(); 
-          setInterval(marco.refresh, 60000);
+          setInterval(marco.refresh, 30000);
       });
     </script>
   </head>
   <body>
     <div id="sounds">
-      <audio id="success" src="sounds/success.ogg" controls/>
-      <audio id="failure" src="sounds/failure.ogg" controls/>
+      <audio id="success_sound" src="sounds/success.ogg" controls/>
+      <audio id="failure_sound" src="sounds/failure.ogg" controls/>
     </div>
 
     <div id="failure_box" class="failure"></div>

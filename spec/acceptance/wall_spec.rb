@@ -8,7 +8,7 @@ describe 'wall' do
   end
 
   it 'should have a failed build' do
-    find('#failure_box').find('h5').text.should == 'at.e2e2.us.functional.browse.regression'
+    find('#failure_box').find('h5').text.should == 'quick'
   end
 
   it 'should have a box for the sounds' do
@@ -16,10 +16,10 @@ describe 'wall' do
   end
 
   it 'should have a success sound' do
-    page.should have_xpath "//audio[@id='success']"
+    page.should have_xpath "//audio[@id='success_sound']"
   end
 
   it 'should have a failure sound' do
-    page.should have_xpath "//audio[@id='failure']"
+    page.should have_xpath "//audio[@id='failure_sound']"
   end
 end

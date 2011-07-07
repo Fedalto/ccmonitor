@@ -47,6 +47,14 @@ describe("a cell", function () {
     cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick', 'buildUrl': 'someUrl', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
   });
 
+  it("should have an unique id", function () {
+    expect(cell.id()).toEqual("AwesomeProjectquick");
+  });
+
+  it("should have a type", function () {
+    expect(cell.type()).toEqual("quick");
+  });
+
   it("should contain a header with the project name", function () {
     expect(cell.element().find('h4').html()).toEqual("AwesomeProject");
   });
@@ -148,7 +156,18 @@ describe("manager", function () {
   it("should create the cells using the ajax response", function () {
     marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
 
-    expect(marco.cells().length).toEqual(4)
+    expect(marco.cells().length).toEqual(4);
+  });
+
+  it("should keep the previous list of cells after refresh", function () {
+    marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
+
+    marco.refresh();
+    expect(marco.oldCells().length).toEqual(4);
+    
+    marco.refresh();
+    expect(marco.oldCells().length).toEqual(4);
+
   });
 
 });
