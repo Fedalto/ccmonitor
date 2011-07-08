@@ -44,6 +44,9 @@ dashboard.cell = function (specs) {
   api.type = function () { return type; };
 
   api.state = function (newState) { 
+    if (newState === undefined) {
+      return state;
+    }
     api.element().removeClass(state);
     state = newState || state; 
     api.element().addClass(state);
@@ -113,7 +116,7 @@ dashboard.manager = function (specs) {
         if (val.state() != cell.state()) {
           $("#" + cell.state() + "_sound").trigger("play");
         }
-        return
+        return false;
       }
     });
   }
