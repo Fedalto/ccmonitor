@@ -1,20 +1,10 @@
 = CC Monitor
 
 == Running CCMonitor
-unicorn -E production -p 4567
-
-== Release 1
-* Two panel view
-* Filters
-
-== Release 2
-* Auto refresh
+unicorn -E local -p 4567
 
 == Possible Features
-* All builds
 * Grouped projects
-* Recently broken builds
 * Filters on the top of the page
 * Highlight broken for too long
 * Highlight not running for too long
-* Get the real feeds
