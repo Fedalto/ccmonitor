@@ -110,12 +110,15 @@ dashboard.manager = function (specs) {
     dashboard.containers.clear();
   }
 
-  function processSound (cell) {
+  function process (cell) {
     $.each(oldCells, function (i, val) {
       if (val.id() === cell.id()) {
+
         if (val.state() != cell.state()) {
+          cell.element().addClass("recent");
           $("#" + cell.state() + "_sound").trigger("play");
         }
+
         return false;
       }
     });
@@ -126,7 +129,7 @@ dashboard.manager = function (specs) {
     var json = $.parseJSON(input);
     $(json.projects).each(function (index, project) {
       var cell = createCell(project);
-      processSound(cell);
+      process(cell);
       cells.push(cell);
     });
   }

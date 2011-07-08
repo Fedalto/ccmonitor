@@ -14,8 +14,12 @@ div.cell.failure {
   width: 200px; 
 }
 
-div.cell.failure.quick {
+div.cell.failure.recent {
   background: #FF0000;
+}
+
+div.cell.success.recent {
+  background: #00FF00;
 }
 
 div.cell.success { 
