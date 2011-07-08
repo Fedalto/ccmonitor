@@ -11,6 +11,7 @@ set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/tmp/ccmonitor.pid"
 set :use_sudo, false
 set :repository, "https://github.com/juanibiapina/ccmonitor.git"
+set :copy_strategy, :export
 
 server app_server, :app
 
