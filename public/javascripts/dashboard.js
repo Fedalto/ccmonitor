@@ -66,6 +66,12 @@ dashboard.cell = function (specs) {
       }))
     );
 
+    state === 'success' && element.append($('<div>', { 'class': 'rightAlign' })
+      .append($('<a>', { 
+        html: "-"
+      }))
+    );
+
     element.append($('<div>')
       .append($('<a>', { 
         href: buildUrl,

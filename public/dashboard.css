@@ -18,9 +18,11 @@ div.cell.failure.recent {
   background: #FF0000;
 }
 
-div.cell.success.recent {
-  background: #00FF00;
-}
+div.cell.success.recent { background: #00FF00; width: 200px }
+div.cell.success.recent h4 { padding: 25px 0 25px 0; font-size: 14pt; text-align: center; }
+div.cell.success.recent h5 { font-size: 10px; }
+div.cell.success.recent { margin: 10px }
+div.cell.success.recent a { font-size: 10pt; }
 
 div.cell.success { 
   background: #40a860; 
@@ -28,9 +30,13 @@ div.cell.success {
   margin: 5px 2px;
 }
 
-div.cell .rightAlign { text-align: right; padding-right: 5px } 
+div.cell.success a {
+  font-size: 4px;
+}
 
-div.cell.success h4 { padding: 10px 0 5px 0; font-size: 7pt; }
+div.cell .rightAlign { text-align: right; padding-right: 5px; } 
+
+div.cell.success h4 { padding: 5px 0 5px 0; font-size: 7pt; }
 div.cell.failure h4 { padding: 25px 0 25px 0; font-size: 14pt; text-align: center; }
 div.cell a { color: white }  
 
