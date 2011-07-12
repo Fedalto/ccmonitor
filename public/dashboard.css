@@ -18,7 +18,7 @@ div.cell.failure.recent {
   background: #FF0000;
 }
 
-div.cell.success.recent { background: #00FF00; width: 200px }
+div.cell.success.recent { width: 200px }
 div.cell.success.recent h4 { padding: 25px 0 25px 0; font-size: 14pt; text-align: center; }
 div.cell.success.recent h5 { font-size: 10px; }
 div.cell.success.recent { margin: 10px }
