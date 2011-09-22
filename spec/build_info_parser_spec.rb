@@ -13,9 +13,9 @@ describe BuildInfoParser do
       </Projects>
       !
 
-      @project1 = BuildInfo.new({'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'build_type' => 'quick', 'buildUrl' => 'someUrl', 'assignedTo' => '-------', 'assignUrl' => 'assignUrl'})
-      @project2 = BuildInfo.new({'name' => 'abettername', 'version' => 'trunk', 'state' => 'success', 'build_type' => 'package', 'buildUrl' => 'someUrl', 'assignedTo' => 'person', 'assignUrl' => 'assignUrl'})
-      @project3 = BuildInfo.new({'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'build_type' => 'isolated.test', 'buildUrl' => 'someUrl', 'assignedTo' => 'person', 'assignUrl' => 'assignUrl'})
+      @project1 = BuildInfo.new({'id' => 'trunk-acoolname-quick', 'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'build_type' => 'quick', 'buildUrl' => 'someUrl', 'assignedTo' => '-------', 'assignUrl' => 'assignUrl'})
+      @project2 = BuildInfo.new({'id' => 'trunk-abettername-package', 'name' => 'abettername', 'version' => 'trunk', 'state' => 'success', 'build_type' => 'package', 'buildUrl' => 'someUrl', 'assignedTo' => 'person', 'assignUrl' => 'assignUrl'})
+      @project3 = BuildInfo.new({'id' => '1.0-anevenbettername-isolated.test', 'name' => 'anevenbettername', 'version' => '1.0', 'state' => 'failure', 'build_type' => 'isolated.test', 'buildUrl' => 'someUrl', 'assignedTo' => 'person', 'assignUrl' => 'assignUrl'})
 
     end
 

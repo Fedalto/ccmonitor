@@ -44,15 +44,15 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'type': 'quick', 'buildUrl': 'someUrl', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
   });
 
   it("should have an unique id", function () {
     expect(cell.id()).toEqual("AwesomeProjectquick");
   });
 
-  it("should have a type", function () {
-    expect(cell.type()).toEqual("quick");
+  it("should have a build type", function () {
+    expect(cell.build_type()).toEqual("quick");
   });
 
   it("should contain a header with the project name", function () {
@@ -123,10 +123,10 @@ describe("manager", function () {
   beforeEach(function () {
     sandbox.createWithContainers();
     json = '{"projects": [' + 
-      '{"name": "Awesome Project", "state": "success", "type": "quick"}, ' +
-      '{"name": "Fun Project", "state": "success", "type": "quick"}, ' +
-      '{"name": "Great Project", "state": "success", "type": "metrics"}, ' +
-      '{"name": "Interesting Project", "state": "failure", "type": "package"} ' +
+      '{"name": "Awesome Project", "state": "success", "build_type": "quick"}, ' +
+      '{"name": "Fun Project", "state": "success", "build_type": "quick"}, ' +
+      '{"name": "Great Project", "state": "success", "build_type": "metrics"}, ' +
+      '{"name": "Interesting Project", "state": "failure", "build_type": "package"} ' +
     ']}';
     ajaxMock = { get: function (url, callback) { callback(json); } };
     marco = dashboard.manager({ajax: ajaxMock});

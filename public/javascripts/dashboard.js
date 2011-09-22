@@ -28,12 +28,12 @@ dashboard.containers = (function () {
 dashboard.cell = function (specs) {
   var state = specs.state, 
       project = specs.name,
-      type = specs.type,
+      build_type = specs.build_type,
       buildUrl = specs.buildUrl,
       assignUrl = specs.assignUrl,
       assignedTo = specs.assignedTo,
       element = null,
-      id = specs.name + specs.type
+      id = specs.name + specs.build_type
       api = {};
 
   function refreshPlacement() {
@@ -41,7 +41,7 @@ dashboard.cell = function (specs) {
   }  
 
   api.id = function () { return id; };
-  api.type = function () { return type; };
+  api.build_type = function () { return build_type; };
 
   api.state = function (newState) { 
     if (newState === undefined) {
@@ -55,7 +55,7 @@ dashboard.cell = function (specs) {
   };
 
   api.element = function () {
-    element = element || $("<div/>", { 'class': state }).addClass("cell").addClass(type); 
+    element = element || $("<div/>", { 'class': state }).addClass("cell").addClass(build_type); 
     element.empty();
 
     state === 'failure' && element.append($('<div>', { 'class': 'rightAlign' })
@@ -85,7 +85,7 @@ dashboard.cell = function (specs) {
 
     element.append($('<div>')
       .append($('<h5>', { 
-        html: type
+        html: build_type
       }))
     );
     

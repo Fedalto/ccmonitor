@@ -18,6 +18,8 @@ class BuildInfoParser
       build_info.assignedTo = assignedTo.empty? ? "-------" : assignedTo
       build_info.assignUrl = project.get_attribute('assignUrl')
 
+      build_info.id = version + '-' + name + '-' + type
+
       @data << build_info
     end
     @data
