@@ -1,26 +1,21 @@
 
- 
+
 <Projects> 
-    
-        
-        <Project name="11.01-project-package"
-             activity="Sleeping"
-             lastBuildStatus="Success"
-             lastBuildLabel="project-11.01.2"
-             lastBuildTime="2011-01-25T22:55:40"
-             webUrl="http://sfci-l06.gid.gap.com:8080/buildresults/11.01-autofeed-package"
-			 assignedTo="duda"
-             assignUrl="http://metrics.gid.gap.com/build_results/edit_build?build_project_name=11.01-autofeed-package"/> 
-        
-        <Project name="11.01-otherproject-quick"
-             activity="Sleeping"
-             lastBuildStatus="Failure"
-             lastBuildLabel="otherproject-trunk"
-             lastBuildTime="2011-01-25T22:52:58"
-             webUrl="http://sfci-l05.gid.gap.com:8080/buildresults/11.01-autofeed-quick"
-			 assignedTo=""
-             assignUrl="http://metrics.gid.gap.com/build_results/edit_build?build_project_name=11.01-autofeed-quick"/> 
-        
-        
-    
+  <Project name="11.01-project-package"
+    activity="Sleeping"
+    lastBuildStatus="Success"
+    lastBuildLabel="project-11.01.2"
+    lastBuildTime="2011-01-25T22:55:40"
+    webUrl="http://buildurl"
+    assignedTo="duda"
+    assignUrl="http://assignUrl"/> 
+
+  <Project name="11.01-otherproject-quick"
+    activity="Sleeping"
+    lastBuildStatus="Failure"
+    lastBuildLabel="otherproject-trunk"
+    lastBuildTime="2011-01-25T22:52:58"
+    webUrl="http://buildUrl2"
+    assignedTo=""
+    assignUrl="http://assignUrl2"/> 
 </Projects> 

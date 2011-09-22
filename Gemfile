@@ -6,6 +6,7 @@ gem 'json'
 gem 'activesupport', :require => 'active_support'
 gem 'unicorn'
 gem 'rake'
+gem 'supermodel'
 
 group :test do
   gem 'jasmine'

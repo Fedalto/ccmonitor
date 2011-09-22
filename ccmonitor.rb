@@ -8,8 +8,6 @@ Dir["lib/**/*.rb"].each { |lib_file| load lib_file }
 
 config_options = YAML.load(File.read("config/config.#{settings.environment}.yml"))
 
-set :CONFIG, config_options
-
 feed_reader = FeedReader.new config_options[:FEED_URL]
 Thread.new do 
   while true
@@ -17,3 +15,5 @@ Thread.new do
     sleep(1)
   end
 end
+
+set :CONFIG, config_options
