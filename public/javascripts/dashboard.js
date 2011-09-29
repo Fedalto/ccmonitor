@@ -29,19 +29,19 @@ dashboard.cell = function (specs) {
   var state = specs.state, 
       project = specs.name,
       build_type = specs.build_type,
+      recent = specs.recent,
       buildUrl = specs.buildUrl,
       assignUrl = specs.assignUrl,
       assignedTo = specs.assignedTo,
       element = null,
-      id = specs.name + specs.build_type
       api = {};
 
   function refreshPlacement() {
     api.element().appendTo(dashboard.containers[state]());
   }  
 
-  api.id = function () { return id; };
   api.build_type = function () { return build_type; };
+  api.recent = function () { return recent; };
 
   api.state = function (newState) { 
     if (newState === undefined) {
@@ -88,7 +88,9 @@ dashboard.cell = function (specs) {
         html: build_type
       }))
     );
-    
+
+    recent === 'true' && element.addClass("recent");
+
     return element;
   };
 
@@ -111,23 +113,14 @@ dashboard.manager = function (specs) {
   }
 
   function resetState() {
-    oldCells = cells;
     cells = [];
     dashboard.containers.clear();
   }
-
+  
   function process (cell) {
-    $.each(oldCells, function (i, val) {
-      if (val.id() === cell.id()) {
-
-        if (val.state() != cell.state()) {
-          cell.element().addClass("recent");
-          $("#" + cell.state() + "_sound").trigger("play");
-        }
-
-        return false;
-      }
-    });
+    if (cell.recent() === true) {
+      $("#" + cell.state() + "_sound").trigger("play");
+    }
   }
 
   function populateCells(input) {

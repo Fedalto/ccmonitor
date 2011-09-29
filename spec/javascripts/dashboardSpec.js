@@ -39,20 +39,31 @@ describe("the containers", function () {
 
 describe("a cell", function () {
   var cell;
+  var recent_cell;
 
   afterEach(sandbox.destroy);
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': 'false', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': 'true', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
   });
 
-  it("should have an unique id", function () {
-    expect(cell.id()).toEqual("AwesomeProjectquick");
+  it("should have a recent attribute", function () {
+    expect(cell.recent()).toEqual("false");
+    expect(recent_cell.recent()).toEqual("true");
   });
 
   it("should have a build type", function () {
     expect(cell.build_type()).toEqual("quick");
+  });
+
+  it("should not contain a recent class if the build is not recent", function () {
+    expect(cell.element().attr("class")).not.toMatch("recent");
+  });
+  
+  it("should contain a recent class if the build is recent", function () {
+    expect(recent_cell.element().attr("class")).toMatch("recent");
   });
 
   it("should contain a header with the project name", function () {
@@ -104,12 +115,12 @@ describe("a cell", function () {
   it("should move itself to the success container when changing state to success", function () {
     cell.state(dashboard.state.success);
     expect(dashboard.containers.success().find('.cell').size()).toEqual(1);
-    expect(dashboard.containers.failure().find('.cell').size()).toEqual(0);
+    expect(dashboard.containers.failure().find('.cell').size()).toEqual(1);
   });
 
   it("should move itself to the failure container when changing state to failure", function () {
     cell.state(dashboard.state.failure);
-    expect(dashboard.containers.failure().find('.cell').size()).toEqual(1);
+    expect(dashboard.containers.failure().find('.cell').size()).toEqual(2);
     expect(dashboard.containers.success().find('.cell').size()).toEqual(0);
   });
   
@@ -157,17 +168,6 @@ describe("manager", function () {
     marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
 
     expect(marco.cells().length).toEqual(4);
-  });
-
-  it("should keep the previous list of cells after refresh", function () {
-    marco = dashboard.manager({ajax: ajaxMock, uris: {refresh: "/refreshment"}});
-
-    marco.refresh();
-    expect(marco.oldCells().length).toEqual(4);
-    
-    marco.refresh();
-    expect(marco.oldCells().length).toEqual(4);
-
   });
 
 });
