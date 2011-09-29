@@ -30,6 +30,7 @@ dashboard.cell = function (specs) {
       project = specs.name,
       build_type = specs.build_type,
       recent = specs.recent,
+      time_since_green = specs.time_since_green,
       buildUrl = specs.buildUrl,
       assignUrl = specs.assignUrl,
       assignedTo = specs.assignedTo,
@@ -42,6 +43,7 @@ dashboard.cell = function (specs) {
 
   api.build_type = function () { return build_type; };
   api.recent = function () { return recent; };
+  api.time_since_green = function () { return time_since_green; };
 
   api.state = function (newState) { 
     if (newState === undefined) {
@@ -90,6 +92,13 @@ dashboard.cell = function (specs) {
     );
 
     recent === 'true' && element.addClass("recent");
+
+    var max_time = 172800;
+
+    var ra = Math.floor(time_since_green / (max_time / 160));
+    var ga = Math.floor(time_since_green / (max_time / 40));
+    var ba = Math.floor(time_since_green / (max_time / 40));
+    state === 'failure' && element.css('background', 'rgb(' + (160-ra) + ',' + (40-ga) + ',' + (40-ba) + ')')
 
     return element;
   };

@@ -45,8 +45,8 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': 'false', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
-    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': 'true', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': 'false', 'time_since_green':'172800', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': 'true', 'time_since_green':'0', 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
   });
 
   it("should have a recent attribute", function () {
@@ -56,6 +56,11 @@ describe("a cell", function () {
 
   it("should have a build type", function () {
     expect(cell.build_type()).toEqual("quick");
+  });
+  
+  it("should have a time_since_green attribute", function () {
+    expect(cell.time_since_green()).toEqual("172800");
+    expect(recent_cell.time_since_green()).toEqual("0");
   });
 
   it("should not contain a recent class if the build is not recent", function () {
