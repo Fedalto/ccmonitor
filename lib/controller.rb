@@ -11,10 +11,15 @@ class App < Sinatra::Application
   end
 
   get "/all_projects" do
-
-    filtered_projects = BuildInfo.all.map do |item|
+    infos = BuildInfo.all.map do |item|
       item.attributes
     end
+
+    name_filter = create_filter :attribute => 'name', :include_exclude_param => 'names'
+    type_filter = create_filter :attribute => 'build_type', :include_exclude_param => 'types'
+    version_filter = create_filter :attribute => 'version', :include_exclude_param => 'versions'
+
+    filtered_projects = version_filter.filter(type_filter.filter(name_filter.filter infos))
 
     JSON.generate({:projects => filtered_projects})
   end

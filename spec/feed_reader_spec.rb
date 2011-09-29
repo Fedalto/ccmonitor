@@ -6,7 +6,7 @@ describe FeedReader do
     reader = FeedReader.new 'resources/cctray.xml'
     reader.run
 
-    build_info = BuildInfo.find_by_name('project')
+    build_info = BuildInfo.find_by_id('11.01-project-package')
     build_info.name.should == 'project'
     build_info.state.should == 'success'
     build_info.build_type.should == 'package'
@@ -14,15 +14,12 @@ describe FeedReader do
     build_info.assignedTo.should == 'duda'
     build_info.assignUrl.should == 'http://assignUrl'
 
-    build_info = BuildInfo.find_by_name('otherproject')
+    build_info = BuildInfo.find_by_id('11.01-otherproject-quick')
     build_info.name.should == 'otherproject'
     build_info.state.should == 'failure'
     build_info.build_type.should == 'quick'
     build_info.buildUrl.should == "http://buildUrl2"
     build_info.assignedTo.should == '-------'
     build_info.assignUrl.should == "http://assignUrl2"
-
-    BuildInfo.find_by_name('project').destroy
-    BuildInfo.find_by_name('otherproject').destroy
   end
 end
