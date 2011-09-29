@@ -12,7 +12,14 @@ class FeedReader
       old_info = BuildInfo.find_by_id(info.id)
       if old_info.nil?
         info.last_succeeded = Time.now
+        info.recent = false
       else
+        if info.state != old_info.state
+          info.recent = true
+        else
+          info.recent = false
+        end
+
         if info.succeeded?
           info.last_succeeded = Time.now
         else

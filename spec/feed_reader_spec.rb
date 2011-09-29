@@ -52,4 +52,41 @@ describe FeedReader do
     build_info = BuildInfo.find_by_id('11.01-otherproject-quick')
     build_info.last_succeeded.should_not be_within(2).of(Time.now)
   end
+
+  it 'should not mark a build as recent in the first run' do
+    FeedReader.new('resources/cctray.xml').run
+
+    build_info = BuildInfo.find_by_id('11.01-project-package')
+    build_info.recent.should == false
+
+    build_info = BuildInfo.find_by_id('11.01-otherproject-quick')
+    build_info.recent.should == false
+
+    build_info = BuildInfo.find_by_id('trunk-otherproject-quick')
+    build_info.recent.should == false
+  end
+
+  it "should not mark a build as recent when the status didn't change" do
+    FeedReader.new('resources/cctray.xml').run
+    FeedReader.new('resources/one-passing.xml').run
+
+    build_info = BuildInfo.find_by_id('11.01-otherproject-quick')
+    build_info.recent.should == false
+  end
+
+  it "should mark a build as recent when the status changed to success" do
+    FeedReader.new('resources/cctray.xml').run
+    FeedReader.new('resources/one-passing.xml').run
+
+    build_info = BuildInfo.find_by_id('trunk-otherproject-quick')
+    build_info.recent.should == true
+  end
+
+  it "should mark a build as recent when the status changed to failure" do
+    FeedReader.new('resources/cctray.xml').run
+    FeedReader.new('resources/one-failing.xml').run
+
+    build_info = BuildInfo.find_by_id('11.01-project-package')
+    build_info.recent.should == true
+  end
 end
