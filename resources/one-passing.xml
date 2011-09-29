@@ -1,0 +1,30 @@
+
+
+<Projects> 
+  <Project name="11.01-project-package"
+    activity="Sleeping"
+    lastBuildStatus="Success"
+    lastBuildLabel="project-11.01.2"
+    lastBuildTime="2011-01-25T22:55:40"
+    webUrl="http://buildurl"
+    assignedTo="duda"
+    assignUrl="http://assignUrl"/> 
+
+  <Project name="11.01-otherproject-quick"
+    activity="Sleeping"
+    lastBuildStatus="Failure"
+    lastBuildLabel="otherproject-11.01"
+    lastBuildTime="2011-01-25T22:52:58"
+    webUrl="http://buildUrl2"
+    assignedTo=""
+    assignUrl="http://assignUrl2"/> 
+  
+  <Project name="trunk-otherproject-quick"
+    activity="Sleeping"
+    lastBuildStatus="Success"
+    lastBuildLabel="otherproject-trunk"
+    lastBuildTime="2011-01-25T22:52:58"
+    webUrl="http://buildUrl3"
+    assignedTo=""
+    assignUrl="http://assignUrl3"/> 
+</Projects> 

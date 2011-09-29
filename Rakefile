@@ -13,7 +13,7 @@ namespace 'spec' do
   end
 
   task 'unit' do
-    sh 'rspec spec/*_spec.rb'
+    sh 'RACK_ENV=test rspec spec/*_spec.rb'
   end
 end
 
