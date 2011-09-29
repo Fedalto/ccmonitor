@@ -27,6 +27,29 @@ describe FeedReader do
     build_info.assignUrl.should == "http://assignUrl2"
   end
 
+  it 'should say time since last succeeded is zero if the info is new' do
+    reader = FeedReader.new 'resources/cctray.xml'
+    reader.run
+
+    build_info = BuildInfo.find_by_id('11.01-project-package')
+    build_info.time_since_green.should == 0
+  end
+
+  it 'should know how many seconds passed since last success build' do
+    FeedReader.new('resources/cctray.xml').run
+    sleep(3)
+    FeedReader.new('resources/one-passing.xml').run
+
+    build_info = BuildInfo.find_by_id('11.01-project-package')
+    build_info.time_since_green.should == 0
+
+    build_info = BuildInfo.find_by_id('11.01-otherproject-quick')
+    build_info.time_since_green.should == 3
+
+    build_info = BuildInfo.find_by_id('trunk-otherproject-quick')
+    build_info.time_since_green.should == 0
+  end
+  
   it 'should save the current time as last succeeded time if the info is new' do
     reader = FeedReader.new 'resources/cctray.xml'
     reader.run
