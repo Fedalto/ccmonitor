@@ -3,10 +3,7 @@ require 'bundler'
 require 'jasmine'
 load 'jasmine/tasks/jasmine.rake'
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new :spec
-
-namespace 'spec' do
+namespace 'tests' do
 
   task 'acceptance' do
     sh 'rspec spec/acceptance'
@@ -17,5 +14,6 @@ namespace 'spec' do
   end
 end
 
+task :spec => ["tests:unit", "tests:acceptance"]
 
 task :default => :spec
