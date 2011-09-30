@@ -17,15 +17,15 @@ class App < Sinatra::Application
       item.attributes
     end
 
-    if params[:alias_ecom] == 'true'
-      infos = Alias.ecom(infos)
-    end
-
     name_filter = create_filter :attribute => 'name', :include_exclude_param => 'names'
     type_filter = create_filter :attribute => 'build_type', :include_exclude_param => 'types'
     version_filter = create_filter :attribute => 'version', :include_exclude_param => 'versions'
 
     filtered_projects = version_filter.filter(type_filter.filter(name_filter.filter infos))
+
+    if params[:alias_ecom] == 'true'
+      filtered_projects = Alias.ecom(filtered_projects)
+    end
 
     JSON.generate({:projects => filtered_projects})
   end
