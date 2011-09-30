@@ -11,7 +11,6 @@ gem 'supermodel'
 group :test do
   gem 'jasmine'
   gem 'capybara'
-  gem 'ruby-debug'
 end
 
 group :development, :test do
