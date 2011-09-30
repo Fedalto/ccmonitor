@@ -80,7 +80,7 @@ dashboard.cell = function (specs) {
         target: "_blank"
       })
         .append($('<h4>', {
-          html: project
+          html: project.toUpperCase()
         }))
       )
     );

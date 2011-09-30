@@ -72,7 +72,7 @@ describe("a cell", function () {
   });
 
   it("should contain a header with the project name", function () {
-    expect(cell.element().find('h4').html()).toEqual("AwesomeProject");
+    expect(cell.element().find('h4').html()).toEqual("AWESOMEPROJECT");
   });
 
   it("should contain a header with the build type", function () {
@@ -82,7 +82,7 @@ describe("a cell", function () {
 
   it("should contain the name of the project as a link the build page", function () {
     expect(cell.element().find('a')[1].href).toMatch("someUrl");
-    expect(cell.element().find('a')[1].innerHTML).toMatch("<h4>" + "AwesomeProject" + "</h4>");
+    expect(cell.element().find('a')[1].innerHTML).toMatch("<h4>" + "AWESOMEPROJECT" + "</h4>");
   });
 
   it("should contain a link to the assign page", function () {

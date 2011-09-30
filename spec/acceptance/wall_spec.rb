@@ -37,7 +37,7 @@ describe 'name filter' do
     visit '/wall?include_names=otherproject' 
 
     all('.cell').each do |cell|
-      cell.find('h4').text.should == 'otherproject'
+      cell.find('h4').text.should == 'OTHERPROJECT'
     end
   end
 
@@ -45,7 +45,7 @@ describe 'name filter' do
     visit '/wall?exclude_names=otherproject' 
 
     all('.cell').each do |cell|
-      cell.find('h4').text.should == 'project'
+      cell.find('h4').text.should == 'PROJECT'
     end
   end
 end
