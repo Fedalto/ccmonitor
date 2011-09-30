@@ -1,6 +1,8 @@
 require 'supermodel'
 
 class BuildInfo < SuperModel::Base
+  include SuperModel::Marshal::Model
+
   def ==(another)
     @attributes == another.attributes
   end

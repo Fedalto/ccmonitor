@@ -31,5 +31,7 @@ class FeedReader
       end
       info.save!
     end
+
+    SuperModel::Marshal.dump
   end
 end

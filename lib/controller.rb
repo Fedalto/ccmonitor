@@ -11,6 +11,8 @@ class App < Sinatra::Application
   end
 
   get "/all_projects" do
+    SuperModel::Marshal.load
+
     infos = BuildInfo.all.map do |item|
       item.attributes
     end
