@@ -91,7 +91,7 @@ dashboard.cell = function (specs) {
       }))
     );
 
-    recent === 'true' && element.addClass("recent");
+    recent === true && element.addClass("recent");
 
     var max_time = 172800;
 
@@ -115,7 +115,6 @@ dashboard.manager = function (specs) {
       startOfParams = window.location.href.indexOf('?'),
       uris = config.uris || {refresh: '/all_projects' + (startOfParams == -1 ? '' : window.location.href.slice(startOfParams))},
       cells = []; 
-      oldCells = [];
 
   function createCell(project) {
     return dashboard.cell(project)
@@ -143,7 +142,6 @@ dashboard.manager = function (specs) {
   }
   
   api.cells = function () { return cells; };
-  api.oldCells = function () { return oldCells; };
   api.refresh = function () { ajax.get(uris.refresh, populateCells); };
 
   api.refresh();
