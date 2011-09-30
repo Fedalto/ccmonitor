@@ -27,6 +27,10 @@ class App < Sinatra::Application
       filtered_projects = Alias.ecom(filtered_projects)
     end
 
+    filtered_projects.sort! do |a,b|
+      a['name'] <=> b['name']
+    end
+
     JSON.generate({:projects => filtered_projects})
   end
 
