@@ -1,4 +1,5 @@
-require 'spec/spec_helper'
+require 'model/build_info'
+require 'build_info_parser'
 
 describe BuildInfoParser do
 

@@ -1,4 +1,5 @@
 class BuildInfoParser
+  require 'nokogiri'
 
   def self.parse(xml)
     @data = []
