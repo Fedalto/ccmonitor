@@ -98,7 +98,7 @@ dashboard.cell = function (specs) {
     var ra = Math.floor(time_since_green / (max_time / 160));
     var ga = Math.floor(time_since_green / (max_time / 40));
     var ba = Math.floor(time_since_green / (max_time / 40));
-    state === 'failure' && element.css('background', 'rgb(' + (160-ra) + ',' + (40-ga) + ',' + (40-ba) + ')')
+    state === 'failure' && recent === false && element.css('background', 'rgb(' + (160-ra) + ',' + (40-ga) + ',' + (40-ba) + ')')
 
     return element;
   };
