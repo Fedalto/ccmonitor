@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'alias'
 
 describe Alias do
 
