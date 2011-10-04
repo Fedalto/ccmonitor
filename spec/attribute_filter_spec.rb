@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'attribute_filter'
 
 describe AttributeFilter do
 
