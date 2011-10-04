@@ -1,5 +1,8 @@
 require 'open-uri'
 
+require File.expand_path(File.join(File.dirname(__FILE__), 'model', 'build_info.rb'))
+require File.expand_path(File.join(File.dirname(__FILE__), 'build_info_parser.rb'))
+
 class FeedReader
   def initialize(feed_url)
     @feed_url = feed_url
