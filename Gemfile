@@ -8,12 +8,9 @@ gem 'unicorn'
 gem 'rake'
 gem 'supermodel'
 
-group :test do
-  gem 'jasmine'
-  gem 'capybara'
-end
-
 group :development, :test do
   gem 'rspec'
+  gem 'jasmine'
   gem 'capistrano'
+  gem 'capybara'
 end

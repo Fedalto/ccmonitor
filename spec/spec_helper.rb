@@ -1,7 +1,7 @@
 require 'ccmonitor'
+require 'capybara/dsl'
 
 Bundler.require :test
-
-require 'capybara/dsl'
+set :logging, false
 
 Dir['spec/support/**/*.rb'].each { |file| require file }
