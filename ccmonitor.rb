@@ -20,11 +20,11 @@ unless settings.environment == :test
           puts 'Reading feed.'
           feed_reader.run
           puts 'Feed updated.'
-          sleep(60)
         end
       rescue Timeout::Error => e
         puts 'Timeout reading feed.'
       end
+      sleep(60)
     end
   end
 end
