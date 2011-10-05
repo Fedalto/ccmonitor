@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler'
+require 'timeout'
 
 Bundler.setup
 Bundler.require :default
@@ -14,10 +15,16 @@ unless settings.environment == :test
   feed_reader = FeedReader.new config_options[:FEED_URL]
   Thread.new do 
     while true
-      puts 'Reading feed.'
-      feed_reader.run
-      puts 'Feed updated.'
-      sleep(60)
+      begin
+        Timeout::timeout(30) do
+          puts 'Reading feed.'
+          feed_reader.run
+          puts 'Feed updated.'
+          sleep(60)
+        end
+      rescue Timeout::Error => e
+        puts 'Timeout reading feed.'
+      end
     end
   end
 end
