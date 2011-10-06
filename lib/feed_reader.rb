@@ -9,6 +9,8 @@ class FeedReader
   end
 
   def run
+    SuperModel::Marshal.load
+
     build_infos = BuildInfoParser.parse open(@feed_url)
 
     build_infos.each do |info|
