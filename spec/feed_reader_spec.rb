@@ -2,8 +2,9 @@ require 'feed_reader'
 
 describe FeedReader do
 
-  after(:each) do
+  before(:each) do
     BuildInfo.destroy_all
+    SuperModel::Marshal.dump
   end
 
   it 'should load the xml and save the objects to the database' do
