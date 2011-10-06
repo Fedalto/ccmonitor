@@ -76,18 +76,3 @@ div#sounds { display: none; }
 .fancy-box:hover {
   border: 1px solid yellow;
 }
-
-#steve {
-  clear: both;
-  background: #e9e8e4 url("/images/steve.png") repeat;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  width: 706px;
-  height: 644px;
-  border: 1px solid gray;
-  margin: auto;
-  margin-bottom: 20px;
-}
