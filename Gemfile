@@ -10,7 +10,7 @@ gem 'supermodel'
 
 group :development, :test do
   gem 'rspec'
-  gem 'jasmine'
+  gem 'jasmine', :git => "git://github.com/jvortmann/jasmine-gem.git"
   gem 'capistrano'
   gem 'capybara'
 end
