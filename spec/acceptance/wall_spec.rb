@@ -1,6 +1,13 @@
 require 'spec/spec_helper'
+require 'stringio'
 
 describe 'wall' do
+  before :all do
+    Kernel.silence_warnings do
+      STDOUT = StringIO.new
+    end
+  end
+
   before { visit '/wall' }
 
   it 'should show a failure box' do

@@ -1,8 +1,14 @@
 require 'feed_reader'
+require 'stringio'
 
 describe FeedReader do
+  before :all do
+    Kernel.silence_warnings do
+      STDOUT = StringIO.new
+    end
+  end
 
-  before(:each) do
+  before :each do
     BuildInfo.destroy_all
     SuperModel::Marshal.dump
   end

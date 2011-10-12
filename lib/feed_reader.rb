@@ -10,7 +10,7 @@ class FeedReader
   end
 
   def log(msg)
-    puts "#{Time.now}: #{msg}"
+    STDOUT.puts "#{Time.now}: #{msg}"
   end
 
   def run
