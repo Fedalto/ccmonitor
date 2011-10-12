@@ -1,2 +1,4 @@
 ---
-:FEED_URL: 'invalid.xml'
+:FEEDS:
+  - 'invalid.xml'
+  - 'invalid2.xml'

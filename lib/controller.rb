@@ -7,17 +7,14 @@ class App < Sinatra::Application
   end
 
   get "/feed_status" do
+    SuperModel::Marshal.load
+
+    @feeds = FeedStatus.all
     erb :feed_status
   end
 
   get "/wall" do
-    SuperModel::Marshal.load
-    feed_status = FeedStatus.find_by_id('main_feed')
-    if feed_status.nil? or not feed_status.ok?
-      erb :feed_unavailable
-    else
-      erb :wall
-    end
+    erb :wall
   end
 
   get "/all_projects" do

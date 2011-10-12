@@ -1,9 +1,20 @@
 require 'spec/spec_helper'
 
 describe 'feed_status' do
-  before { visit '/feed_status' }
+  before(:each) do
+    FeedStatus.destroy_all
+    FeedStatus.new({'id' => 'lol_id'}).save!
+    SuperModel::Marshal.dump
+    visit '/feed_status'
+  end
 
   it 'should show a feeds box' do
     page.should have_xpath "//div[@id='feed_box']"
+  end
+
+  it 'should show a box for each feed' do
+    page.should have_xpath "//div[@class='feed']"
+
+    find('.feed').find('a').text.should == 'lol_id'
   end
 end

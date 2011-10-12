@@ -3,6 +3,12 @@
     <meta http-equiv="refresh" content="60">
   </head>
   <body>
-    <div id="feed_box" class="feeds">Feed list</div>
+    <div id="feed_box" class="feeds">
+      <% for @feed in @feeds %>
+        <div class="feed">
+          <a href="<%= @feed.id %>"><%= @feed.id %></a>
+        </div>
+      <% end %>
+    </div>
   </body>
 </html>

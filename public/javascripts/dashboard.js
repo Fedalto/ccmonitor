@@ -32,8 +32,6 @@ dashboard.cell = function (specs) {
       recent = specs.recent,
       time_since_green = specs.time_since_green,
       buildUrl = specs.buildUrl,
-      assignUrl = specs.assignUrl,
-      assignedTo = specs.assignedTo,
       element = null,
       api = {};
 
@@ -59,20 +57,6 @@ dashboard.cell = function (specs) {
   api.element = function () {
     element = element || $("<div/>", { 'class': state }).addClass("cell").addClass("fancy-box").addClass(build_type);
     element.empty();
-
-    state === 'failure' && element.append($('<div>', { 'class': 'rightAlign' })
-      .append($('<a>', { 
-        href: assignUrl,
-        target: "_blank",
-        html: assignedTo
-      }))
-    );
-
-    state === 'success' && element.append($('<div>', { 'class': 'rightAlign' })
-      .append($('<a>', { 
-        html: "-"
-      }))
-    );
 
     element.append($('<div>')
       .append($('<a>', { 
