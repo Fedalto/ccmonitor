@@ -1,2 +1,3 @@
----
-:FEED_URL: 'http://metrics.gid.gap.com/cctray.xml'
+:FEEDS:
+  - 'http://sfci-l01.gid.gap.com:8080/dashboard/cctray.xml'
+  - 'http://ft04.gid.gap.com:8080/dashboard/cctray.xml'

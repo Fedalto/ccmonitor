@@ -16,6 +16,7 @@ div.cell { margin: 5px; color: #f2f2f2; text-align: center; overflow: hidden; di
 div.cell.failure { 
   background: #a04040; 
   width: 250; 
+  padding-top: 20px;
 }
 
 div.cell.failure.recent {
@@ -32,6 +33,7 @@ div.cell.success {
   background: #40a860; 
   width: 60px; 
   margin: 5px 2px;
+  padding-top: 8px;
 }
 
 div.cell.success a {

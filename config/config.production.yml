@@ -1,2 +1,3 @@
 ---
-:FEED_URL: 'http://localhost/cctray.xml'
+:FEEDS:
+  - 'http://localhost/cctray.xml'

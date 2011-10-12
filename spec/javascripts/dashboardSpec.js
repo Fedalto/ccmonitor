@@ -45,8 +45,8 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': false, 'time_since_green':172800, 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
-    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': true, 'time_since_green':0, 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': false, 'time_since_green':172800});
+    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': true, 'time_since_green':0});
   });
 
   it("should have a recent attribute", function () {
@@ -81,15 +81,10 @@ describe("a cell", function () {
   });
 
   it("should contain the name of the project as a link the build page", function () {
-    expect(cell.element().find('a')[1].href).toMatch("someUrl");
-    expect(cell.element().find('a')[1].innerHTML).toMatch("<h4>" + "AWESOMEPROJECT" + "</h4>");
+    expect(cell.element().find('a')[0].href).toMatch("someUrl");
+    expect(cell.element().find('a')[0].innerHTML).toMatch("<h4>" + "AWESOMEPROJECT" + "</h4>");
   });
 
-  it("should contain a link to the assign page", function () {
-    expect(cell.element().find('a')[0].href).toMatch('assignUrl');
-    expect(cell.element().find('a')[0].innerHTML).toMatch('person');
-  });
-  
   it("should move itself to the correct container at creation time", function () {
     expect(cell.element().parent().attr("id")).toEqual("failure_box");
   });

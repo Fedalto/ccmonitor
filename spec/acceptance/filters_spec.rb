@@ -1,11 +1,11 @@
 require 'spec/spec_helper'
 
 describe 'name filter' do
-  it 'should include only builds called otherproject' do
-    visit '/wall?include_names=otherproject' 
+  it 'should include only builds called evenanotherproject' do
+    visit '/wall?include_names=evenanotherproject' 
 
     all('.cell').each do |cell|
-      cell.find('h4').text.should == 'OTHERPROJECT'
+      cell.find('h4').text.should == 'EVENANOTHERPROJECT'
     end
   end
 

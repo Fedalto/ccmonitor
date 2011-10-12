@@ -38,15 +38,3 @@ describe 'wall' do
     page.should have_xpath "//audio[@id='failure_sound']"
   end
 end
-
-describe 'feed unavailable' do
-  before(:each) do
-    FeedReader.new('invalid_file.xml').run
-  end
-
-  it 'should show the error page' do
-    visit '/wall' 
-
-    page.should have_xpath "//div[@id='error_box']"
-  end
-end
