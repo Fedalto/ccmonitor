@@ -13,15 +13,7 @@ unless settings.environment == :test
   feed_reader = FeedReader.new config_options[:FEED_URL]
   Thread.new do 
     while true
-      begin
-        Timeout::timeout(30) do
-          puts 'Reading feed.'
-          feed_reader.run
-          puts 'Feed updated.'
-        end
-      rescue Timeout::Error => e
-        puts 'Timeout reading feed.'
-      end
+      feed_reader.run
       sleep(60)
     end
   end

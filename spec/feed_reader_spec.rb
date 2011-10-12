@@ -113,4 +113,16 @@ describe FeedReader do
     build_info = BuildInfo.find_by_id('11.01-project-package')
     build_info.recent.should == true
   end
+
+  it "should mark feed status as ok when feed is valid" do
+    FeedReader.new('resources/cctray.xml').run
+
+    FeedStatus.find_by_id('main_feed').ok?.should == true
+  end
+
+  it 'should make feed status as unnavailable when something fails' do
+    FeedReader.new('resources/invalid.xml').run
+
+    FeedStatus.find_by_id('main_feed').ok?.should == false
+  end
 end
