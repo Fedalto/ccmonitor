@@ -6,6 +6,10 @@ class App < Sinatra::Application
     redirect to("/wall")
   end
 
+  get "/feed_status" do
+    erb :feed_status
+  end
+
   get "/wall" do
     SuperModel::Marshal.load
     feed_status = FeedStatus.find_by_id('main_feed')
