@@ -2,8 +2,7 @@ $:.unshift(ENV['JASMINE_GEM_PATH']) if ENV['JASMINE_GEM_PATH'] # for gem testing
 
 require 'rubygems'
 require 'jasmine'
-
-## Monkey patch to increase Jasmine wait time out
+#Monkey patch to increase Jasmine wait time out
 module Jasmine
   def self.wait_for_listener(port, name = "required process", seconds_to_wait = 50)
     time_out_at = Time.now + seconds_to_wait
@@ -17,8 +16,9 @@ module Jasmine
 end
 
 jasmine_config_overrides = File.expand_path(File.join(File.dirname(__FILE__), 'jasmine_config.rb'))
+
 require jasmine_config_overrides if File.exist?(jasmine_config_overrides)
-if Jasmine::rspec2?
+if Jasmine::Dependencies.rspec2?
   require 'rspec'
 else
   require 'spec'
@@ -29,7 +29,7 @@ spec_builder = Jasmine::SpecBuilder.new(jasmine_config)
 
 should_stop = false
 
-if Jasmine::rspec2?
+if Jasmine::Dependencies.rspec2?
   RSpec.configuration.after(:suite) do
     spec_builder.stop if should_stop
   end
