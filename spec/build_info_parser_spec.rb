@@ -14,8 +14,8 @@ describe BuildInfoParser do
       </Projects>
       !
 
-      @project1 = BuildInfo.new({'id' => 'trunk-acoolname-quick', 'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'build_type' => 'quick', 'buildUrl' => 'someUrl'})
-      @project2 = BuildInfo.new({'id' => 'trunk-abettername-package', 'name' => 'abettername', 'version' => 'trunk', 'state' => 'success', 'build_type' => 'package', 'buildUrl' => 'someUrl'})
+      @project1 = BuildInfo.new({'id' => 'trunk-acoolname-quick', 'name' => 'acoolname', 'version' => 'trunk', 'state' => 'success', 'activity' => 'sleeping', 'build_type' => 'quick', 'buildUrl' => 'someUrl'})
+      @project2 = BuildInfo.new({'id' => 'trunk-abettername-package', 'name' => 'abettername', 'version' => 'trunk', 'state' => 'success', 'activity' => 'building', 'build_type' => 'package', 'buildUrl' => 'someUrl'})
 
     end
 
