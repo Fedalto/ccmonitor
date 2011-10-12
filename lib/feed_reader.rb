@@ -51,7 +51,7 @@ class FeedReader
       log "Exception thrown while reading feed: #{e}"
       feed_status.status = 'iiiiiiiiiiii'
     end
-    log 'Feed updated.'
+    log "Feed updated: #{@feed_url}"
 
     feed_status.save!
     SuperModel::Marshal.dump
