@@ -14,8 +14,19 @@ namespace 'tests' do
   end
 
   desc "Run the javascript tests"
-  task :js => [:require_jasmine] do
-    Rake::Task['jasmine:ci'].invoke
+  task :js => 'js:ci'
+
+  namespace 'js' do
+    task :default => :ci
+
+    task :ci => [:require_jasmine] do
+      Rake::Task['jasmine:ci'].invoke
+    end
+
+    desc "Run the javascript tests server"
+    task :server => [:require_jasmine] do
+      Rake::Task['jasmine:server'].invoke
+    end
   end
 
 end
