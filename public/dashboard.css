@@ -9,13 +9,14 @@ html, html *, * {
 
 body {
   background: #e9e8e4 url("/images/bg.jpg") repeat;
+  padding: 7px;
 }
 
-div.cell { margin: 5px; color: #f2f2f2; text-align: center; overflow: hidden; display: inline-block; border-radius: 3px; }
+div.cell { margin: 0 7px 7px 0; color: #f2f2f2; text-align: center; overflow: hidden; display: inline-block; border-radius: 3px; }
 
 div.cell.failure { 
   background: #a04040; 
-  width: 250; 
+  width: 250px;
 }
 
 div.cell.failure.recent {
@@ -25,13 +26,12 @@ div.cell.failure.recent {
 div.cell.success.recent { width: 250px }
 div.cell.success.recent h4 { padding: 10px 0 10px 0; font-size: 23pt; text-align: center; }
 div.cell.success.recent h5 { font-size: 10pt; }
-div.cell.success.recent { margin: 10px }
 div.cell.success.recent a { font-size: 10pt; }
 
 div.cell.success { 
   background: #40a860; 
-  width: 60px; 
-  margin: 5px 2px;
+  width: 77px;
+  margin: 3px 5px 3px 0;
 }
 
 div.cell.success a {
@@ -40,7 +40,7 @@ div.cell.success a {
 
 div.cell .rightAlign { text-align: right; padding-right: 5px; } 
 
-div.cell.success h4 { padding: 5px 0 5px 0; font-size: 7pt; }
+div.cell.success h4 { padding: 8px 2px 8px 2px; font-size: 7pt; }
 div.cell.failure h4 { padding: 10px 0 10px 0; font-size: 23pt; text-align: center; }
 div.cell a { color: white }  
 
@@ -49,17 +49,17 @@ div.cell.success h5 { font-size: 4pt; }
 div.cell.failure h5 { font-size: 10pt; }
 div.cell.failure a { font-size: 10pt; }
 
-div#success_box { float: left; width: auto; }
+div#success_box { float: left; width: auto; margin-top: 20px; }
 div#failure_box { float: left; width: auto; }
 
 div#sounds { display: none; }
 
 .fancy-box.success {
-  padding: 2px;
+  padding: 2px 2px 2px 0;
 }
 
 .fancy-box.failure {
-  padding: 5px;
+  padding: 5px 5px 5px 0;
 }
 
 .fancy-box {
