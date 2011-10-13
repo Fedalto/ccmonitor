@@ -9,7 +9,7 @@
     webUrl="http://buildurl"/> 
 
   <Project name="trunk-otherproject-quick"
-    activity="Sleeping"
+    activity="Building"
     lastBuildStatus="Failure"
     lastBuildLabel="otherproject-11.01"
     lastBuildTime="2011-01-25T22:52:58"
@@ -21,4 +21,11 @@
     lastBuildLabel="otherproject-trunk"
     lastBuildTime="2011-01-25T22:52:58"
     webUrl="http://buildUrl3" /> 
+
+  <Project name="trunk-otherproject-long"
+    activity="Building"
+    lastBuildStatus="Success"
+    lastBuildLabel="otherproject-trunk"
+    lastBuildTime="2011-01-25T22:55:11"
+    webUrl="http://buildUrl4" />
 </Projects> 
