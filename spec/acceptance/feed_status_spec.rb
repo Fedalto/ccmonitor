@@ -1,6 +1,9 @@
 require 'spec/spec_helper'
+require "rack/test"
 
 describe 'feed_status' do
+  include Rack::Test::Methods
+
   before(:each) do
     FeedStatus.destroy_all
     FeedStatus.new({'id' => 'lol_id'}).save!
