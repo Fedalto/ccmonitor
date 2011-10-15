@@ -18,7 +18,7 @@ class FeedReader
 
     feed_status = FeedStatus.find_by_id('main_feed') || FeedStatus.new({'id' => 'main_feed'})
 
-    log 'Reading feed.'
+    log "Reading feed? #{@feed_url}"
     begin
       build_infos = BuildInfoParser.parse open(@feed_url)
 
@@ -51,7 +51,7 @@ class FeedReader
       log "Exception thrown while reading feed: #{e}"
       feed_status.status = 'iiiiiiiiiiii'
     end
-    log 'Feed updated.'
+    log "Feed updated: #{@feed_url}"
 
     feed_status.save!
     SuperModel::Marshal.dump
