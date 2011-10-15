@@ -19,6 +19,10 @@ div.cell.failure {
   width: 250px;
 }
 
+div.cell.failure.building {
+  background: rgb(228, 124, 12) url("images/failure_building.gif") no-repeat 220px 2px;
+}
+
 div.cell.failure.recent {
   background: #FF0000;
 }
@@ -34,14 +38,18 @@ div.cell.success {
   margin: 3px 5px 3px 0;
 }
 
+div.cell.success.building {
+  background: rgb(99, 162, 210) url("images/success_building.gif") no-repeat 65px 2px;
+}
+
 div.cell.success a {
   font-size: 4px;
 }
 
-div.cell .rightAlign { text-align: right; padding-right: 5px; } 
+div.cell .leftAlign { text-align: left; padding-left: 5px; } 
 
-div.cell.success h4 { padding: 8px 2px 8px 2px; font-size: 7pt; }
-div.cell.failure h4 { padding: 10px 0 10px 0; font-size: 23pt; text-align: center; }
+div.cell.success h4 { padding: 6px 1px 7px 3px; font-size: 7pt; }
+div.cell.failure h4 { padding: 10px 0 10px 10px; font-size: 23pt; text-align: center; }
 div.cell a { color: white }  
 
 div.cell h5 { text-align: right; padding-right: 5px }

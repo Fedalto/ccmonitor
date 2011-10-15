@@ -23,7 +23,7 @@ describe 'wall' do
   end
 
   it 'should have a success build' do
-    find('#success_box').find('h5').text.should == 'package'
+    find('#success_box').find('h5').text.should == 'long'
   end
 
   it 'should have a box for the sounds' do
