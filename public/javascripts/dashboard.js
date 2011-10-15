@@ -27,6 +27,7 @@ dashboard.containers = (function () {
 
 dashboard.cell = function (specs) {
   var state = specs.state, 
+      activity = specs.activity,
       project = specs.name,
       build_type = specs.build_type,
       recent = specs.recent,
@@ -44,6 +45,7 @@ dashboard.cell = function (specs) {
   api.build_type = function () { return build_type; };
   api.recent = function () { return recent; };
   api.time_since_green = function () { return time_since_green; };
+  api.activity = function () { return activity };
 
   api.state = function (newState) { 
     if (newState === undefined) {
@@ -92,6 +94,8 @@ dashboard.cell = function (specs) {
     );
 
     recent === true && element.addClass("recent");
+
+    activity === 'building' && element.addClass("building");
 
     var max_time = 172800;
 

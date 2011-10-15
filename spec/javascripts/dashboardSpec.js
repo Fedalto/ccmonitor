@@ -45,8 +45,14 @@ describe("a cell", function () {
   
   beforeEach(function () {
     sandbox.createWithContainers();
-    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': false, 'time_since_green':172800, 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
-    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': true, 'time_since_green':0, 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    cell = dashboard.cell({name: 'AwesomeProject', state: dashboard.state.failure, 'activity': 'sleeping', 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': false, 'time_since_green':172800, 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+    building_cell = dashboard.cell({name: 'OtherProject', state: dashboard.state.failure, 'activity': 'building', 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': false, 'time_since_green':172800});
+    recent_cell = dashboard.cell({name: 'BetterProject', state: dashboard.state.failure, 'activity': 'sleeping', 'build_type': 'quick', 'buildUrl': 'someUrl', 'recent': true, 'time_since_green':0, 'assignedTo': 'person', 'assignUrl': 'assignUrl'});
+  });
+
+  it("should have a activity attribute", function () {
+    expect(cell.activity()).toEqual('sleeping');
+    expect(building_cell.activity()).toEqual('building');
   });
 
   it("should have a recent attribute", function () {
@@ -65,6 +71,11 @@ describe("a cell", function () {
 
   it("should not contain a recent class if the build is not recent", function () {
     expect(cell.element().attr("class")).not.toMatch("recent");
+  });
+
+  it("should contain a building class if and only if the build is building", function () {
+    expect(cell.element().attr("class")).not.toMatch("building");
+    expect(building_cell.element().attr("class")).toMatch("building");
   });
   
   it("should contain a recent class if the build is recent", function () {
@@ -120,12 +131,12 @@ describe("a cell", function () {
   it("should move itself to the success container when changing state to success", function () {
     cell.state(dashboard.state.success);
     expect(dashboard.containers.success().find('.cell').size()).toEqual(1);
-    expect(dashboard.containers.failure().find('.cell').size()).toEqual(1);
+    expect(dashboard.containers.failure().find('.cell').size()).toEqual(2);
   });
 
   it("should move itself to the failure container when changing state to failure", function () {
     cell.state(dashboard.state.failure);
-    expect(dashboard.containers.failure().find('.cell').size()).toEqual(2);
+    expect(dashboard.containers.failure().find('.cell').size()).toEqual(3);
     expect(dashboard.containers.success().find('.cell').size()).toEqual(0);
   });
   
