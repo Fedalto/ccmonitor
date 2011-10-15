@@ -13,6 +13,7 @@ class BuildInfoParser
       build_info = BuildInfo.new
       build_info.name = name
       build_info.state = project.get_attribute('lastBuildStatus').downcase
+      build_info.activity = project.get_attribute('activity').downcase
       build_info.version = version
       build_info.build_type = type
       build_info.buildUrl = project.get_attribute('webUrl')
