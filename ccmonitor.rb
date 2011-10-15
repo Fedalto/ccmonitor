@@ -11,12 +11,22 @@ config_options = YAML.load(File.read("config/config.#{settings.environment}.yml"
 
 unless settings.environment == :test
   feed_reader = FeedReader.new config_options[:FEED_URL]
+
+  activity_feeds = []
+  config_options[:REAL_FEEDS].each do |feed|
+    activity_feeds << ActivityReader.new(feed)
+  end
+
   Thread.new do 
     while true
       feed_reader.run
-      sleep(60)
+      activity_feeds.each do |feed|
+        feed.run
+      end
+      sleep(30)
     end
   end
+
 end
 
 set :CONFIG, config_options

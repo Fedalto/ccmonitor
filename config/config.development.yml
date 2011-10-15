@@ -1,4 +1,4 @@
 ---
 :FEED_URL: 'resources/cctray.xml'
 :REAL_FEEDS:
-  - 'http://resources/activity.xml'
+  - 'resources/activity.xml'
