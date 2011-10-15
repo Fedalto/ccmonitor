@@ -1,6 +1,12 @@
 require 'activity_reader'
+require 'stringio'
 
 describe ActivityReader do
+  before :all do
+    Kernel.silence_warnings do
+      STDOUT = StringIO.new
+    end
+  end
 
   before :each do
     FeedReader.new('resources/cctray.xml').run

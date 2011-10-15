@@ -1,6 +1,13 @@
 require 'spec/spec_helper'
+require 'stringio'
 
 describe 'name filter' do
+  before :all do
+    Kernel.silence_warnings do
+      STDOUT = StringIO.new
+    end
+  end
+
   it 'should include only builds called otherproject' do
     visit '/wall?include_names=otherproject' 
 
