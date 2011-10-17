@@ -12,6 +12,7 @@ class App < Sinatra::Application
     if feed_status.nil? or not feed_status.ok?
       erb :feed_unavailable
     else
+      response.headers["X-Frame-Options"] = "GOFORIT"
       erb :wall
     end
   end
