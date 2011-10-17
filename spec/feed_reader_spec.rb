@@ -34,6 +34,14 @@ describe FeedReader do
     build_info.assignUrl.should == "http://assignUrl2"
   end
 
+  it 'should not touch the activity field' do
+    FeedReader.new('resources/activity.xml').run
+    FeedReader.new('resources/cctray.xml').run
+    
+    build_info = BuildInfo.find_by_id('trunk-otherproject-quick')
+    build_info.activity.should == 'building'
+  end
+
   it 'should say time since last succeeded is zero if the info is new' do
     reader = FeedReader.new 'resources/cctray.xml'
     reader.run

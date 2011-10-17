@@ -29,6 +29,8 @@ class FeedReader
           info.time_since_green = 0
           info.recent = false
         else
+          info.activity = old_info.activity
+
           if info.state != old_info.state
             info.recent = true
           else
