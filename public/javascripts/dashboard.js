@@ -62,7 +62,7 @@ dashboard.cell = function (specs) {
     element = element || $("<div/>", { 'class': state }).addClass("cell").addClass("fancy-box").addClass(build_type);
     element.empty();
 
-    state === 'failure' && element.append($('<div>', { 'class': 'leftAlign' })
+    state === 'failure' && element.append($('<div>', { 'class': 'on_it' })
       .append($('<a>', { 
         href: assignUrl,
         target: "_blank",
@@ -70,7 +70,7 @@ dashboard.cell = function (specs) {
       }))
     );
 
-    state === 'success' && element.append($('<div>', { 'class': 'leftAlign' })
+    state === 'success' && element.append($('<div>', { 'class': 'on_it' })
       .append($('<a>', { 
         html: "-"
       }))
