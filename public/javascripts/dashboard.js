@@ -97,6 +97,13 @@ dashboard.cell = function (specs) {
 
     activity === 'building' && element.addClass("building");
 
+    var max_time = 7 * 24 * 60 * 60;
+
+    var ra = Math.floor(time_since_green / (max_time / 160));
+    var ga = Math.floor(time_since_green / (max_time / 40));
+    var ba = Math.floor(time_since_green / (max_time / 40));
+    state === 'failure' && recent === false && element.css('background-color', 'rgb(' + (160-ra) + ',' + (40-ga) + ',' + (40-ba) + ')');
+
     return element;
   };
 
