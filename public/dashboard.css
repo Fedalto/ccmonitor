@@ -20,7 +20,7 @@ div.cell.failure {
 }
 
 div.cell.failure.building {
-  background: #a04040 url("images/failure_building.gif") no-repeat 15px 60px;
+  background: #a04040 url("images/failure_building.gif") no-repeat 220px 2px;
 }
 
 div.cell.failure.recent {
@@ -39,7 +39,7 @@ div.cell.success {
 }
 
 div.cell.success.building {
-  background: #40a860 url("images/success_building.gif") no-repeat 6px 26px;
+  background: #40a860 url("images/success_building.gif") no-repeat 65px 2px;
 }
 
 div.cell.success a {
