@@ -29,4 +29,5 @@ unless settings.environment == :test
 
 end
 
+set :logging, false
 set :CONFIG, config_options
