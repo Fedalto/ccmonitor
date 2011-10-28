@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 
-set :user, "eggbuild"
-set :app_server, "metrics.gid.gap.com"
+set :user, "evey"
+set :app_server, "10.27.15.3"
 
 set :application, "ccmonitor"
 set :branch, "master"
@@ -19,7 +19,7 @@ server app_server, :app
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E production -D"
+    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E local -D"
   end
 
   task :stop, :roles => :app, :except => { :no_release => true } do
