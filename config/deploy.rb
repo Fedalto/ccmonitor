@@ -4,7 +4,7 @@ set :user, "evey"
 set :app_server, "10.27.15.3"
 
 set :application, "ccmonitor"
-set :branch, "master"
+set :branch, "localdeploy"
 set :scm, :git
 set :deploy_to, "/home/#{user}/#{application}"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
