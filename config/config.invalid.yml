@@ -2,3 +2,5 @@
 :FEED_URL: 'invalid.xml'
 :REAL_FEEDS:
   - 'invalid.xml'
+  - 'http://haha.com'
+  - 'http://google.com'

@@ -19,11 +19,15 @@ unless settings.environment == :test
 
   Thread.new do 
     while true
-      feed_reader.run
-      activity_feeds.each do |feed|
-        feed.run
+      begin
+        feed_reader.run
+        activity_feeds.each do |feed|
+          feed.run
+        end
+        sleep(30)
+      rescue => e
+        puts e
       end
-      sleep(30)
     end
   end
 
