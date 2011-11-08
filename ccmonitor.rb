@@ -25,7 +25,7 @@ unless settings.environment == :test
           feed.run
         end
         sleep(30)
-      rescue => e
+      rescue Exception => e
         puts e
       end
     end
