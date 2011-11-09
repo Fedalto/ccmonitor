@@ -139,4 +139,36 @@ describe FeedReader do
 
     FeedStatus.find_by_id('main_feed').ok?.should == false
   end
+
+  it 'should save the last updated time' do
+    FeedReader.new('resources/cctray.xml').run
+
+    BuildInfo.find_by_id('11.01-project-package').last_updated.should be_within(1).of(Time.now)
+    BuildInfo.find_by_id('11.01-otherproject-quick').last_updated.should be_within(1).of(Time.now)
+    BuildInfo.find_by_id('trunk-otherproject-quick').last_updated.should be_within(1).of(Time.now)
+    BuildInfo.find_by_id('trunk-otherproject-long').last_updated.should be_within(1).of(Time.now)
+  end
+
+  it 'should not update the time if a build info is missing from the feed' do
+    FeedReader.new('resources/cctray.xml').run
+    sleep(2)
+    FeedReader.new('resources/missing.xml').run
+
+    BuildInfo.find_by_id('11.01-project-package').last_updated.should be_within(1).of(Time.now)
+    BuildInfo.find_by_id('11.01-otherproject-quick').last_updated.should be_within(1).of(Time.now)
+    BuildInfo.find_by_id('trunk-otherproject-long').last_updated.should be_within(1).of(Time.now)
+
+    BuildInfo.find_by_id('trunk-otherproject-quick').last_updated.should_not be_within(1).of(Time.now)
+  end
+
+  it 'should delete builds that are missing for more then one hour' do
+    FeedReader.new('resources/cctray.xml').run
+    build_info = BuildInfo.find_by_id('trunk-otherproject-quick')
+    build_info.last_updated = Time.now - (60 * 60 + 100)
+    build_info.save!
+    SuperModel::Marshal.dump
+    FeedReader.new('resources/missing.xml').run
+
+    BuildInfo.find_by_id('trunk-otherproject-quick').should be_nil
+  end
 end

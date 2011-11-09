@@ -45,7 +45,14 @@ class FeedReader
             info.time_since_green = Time.now.to_i - info.last_succeeded.to_i
           end
         end
+        info.last_updated = Time.now
         info.save!
+      end
+
+      BuildInfo.all.each do |info|
+        if (Time.now - info.last_updated) >= (60*60)
+          info.destroy
+        end
       end
 
       feed_status.status = 'ok'
