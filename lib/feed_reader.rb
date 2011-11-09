@@ -50,9 +50,13 @@ class FeedReader
       end
 
       BuildInfo.all.each do |info|
-        if (Time.now - info.last_updated) >= (60*60)
-          puts "Removing info: #{info.id}"
+        if not info.respond_to?('last_updated')
           info.destroy
+        else
+          if (Time.now - info.last_updated) >= (60*60)
+            puts "Removing info: #{info.id}"
+            info.destroy
+          end
         end
       end
 
