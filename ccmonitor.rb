@@ -31,6 +31,20 @@ unless settings.environment == :test
     end
   end
 
+  Thread.new do
+    while true
+      begin
+        reader = ComponentTestReader.new(config_options[:SOLR_QUICK_URL])
+        reader.parse_page
+        ComponentTest.create_or_update(:name => :solr, :status => reader.test_status)
+        sleep(60)
+      rescue Exception => e
+        puts e
+      end
+    end
+  end
+
+
 end
 
 set :logging, false
