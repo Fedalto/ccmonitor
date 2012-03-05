@@ -7,7 +7,6 @@ gem 'activesupport', :require => 'active_support'
 gem 'unicorn'
 gem 'rake'
 gem 'supermodel'
-gem 'ruby-debug'
 
 group :development, :test do
   gem 'rspec'
