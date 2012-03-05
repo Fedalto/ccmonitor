@@ -36,7 +36,7 @@ class App < Sinatra::Application
 
     if params[:component_test] == 'true'
       ComponentTest.all.each do |component_test|
-        new_project = filtered_projects.select { |e| e["name"] == component_test.name.to_s && e["build_type"] == "quick"}.first.dup
+        new_project = infos.select { |e| e["name"] == component_test.name.to_s && e["build_type"] == "quick"}.first.dup
         new_project["state"] = component_test.status.to_s
         new_project["build_type"] = "component"
         filtered_projects.push(new_project)
